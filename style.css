@@ -1,0 +1,1431 @@
+/*
+Theme Name: Mesa-Profesional
+Theme URI: https://themeegg.com/downloads/miteri/
+Author: MASMP
+Author URI: https://mesaprofesional.com
+Version: 1.0
+*/
+
+
+body{
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	color: #333;
+    background-color: #EFEFEF;
+}
+
+
+/* General Layout */
+header{
+    background: url(https://mesaprofesional.com/wp-content/uploads/2018/03/mp-header-background.jpeg) 0 520px;
+    padding: 10px 0;
+    height: 240px;
+    background-size: cover;
+    position: relative;
+}
+
+header::before{
+    background: rgba(0, 0, 0, 0) url(https://mesaprofesional.com/wp-content/uploads/2018/03/gradient.png) repeat-x scroll 0 0;
+    bottom: 0;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.no-padding{
+    padding: 0 !important;
+}
+
+.no-padding-left{
+    padding-left: 0 !important;
+}
+
+.no-padding-right{
+    padding-right: 0 !important;
+}
+
+.no-margin{
+    margin: 0 !important;
+}
+
+.text-success{
+    color: #09b30b;
+}
+
+.alert{
+    margin-bottom: 20px;
+}
+
+.alert p{
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+.asterisk{
+    color: red;
+}
+
+.box{
+    background-color: #FFF;
+    padding: 15px;
+}
+
+.form-control{
+    padding: 12px;
+    font-size: 13px;
+    border-radius: 0;
+    height: 45px;
+}
+
+a.professional-name.text-success{
+    font-size: 10px;
+    font-style: italic;
+    display: inline-block;
+    color: #09b30b;
+    float: left;
+    margin: 0 0 0 7px;
+}
+
+a.professional-name.text-success:hover{
+    color: #09b30b;
+}
+
+a.professional-name.text-success .fa-user{
+    margin: 1px 3px 0 0;
+}
+
+.container{
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.container.dashboard{
+    margin-top: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.container .body{
+    margin-top: 20px;
+}
+
+.container .body .left-col{
+    border-right: 1px solid #ededed;
+}
+
+
+/* Buttons Styles */
+
+button.btn-success.running{
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+
+/* Navigation Menus */
+
+nav[aria-label="breadcrumb"]{
+    margin-top: 20px;
+}
+
+nav ul{
+    margin: 0;
+    padding: 0;
+}
+
+nav ul:before,
+nav ul:after{
+    content: " ";
+    display: table;
+}
+
+nav ul:after{
+    clear: both;
+}
+
+nav ul{
+    *zoom: 1;
+}
+
+nav ul li{
+    list-style: none;
+    float: left;
+}
+
+/* Footer Layout */
+footer .footer-bar{
+    height: 30px;
+    background-color: #333;
+}
+
+footer .container{
+    background-color: transparent;
+    margin-top: 0;
+    padding: 0;
+}
+
+footer .container .footer-widgets{
+    padding-top: 10px;
+    border-top: 1px solid #DDD;
+}
+
+footer .container .signature{
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* Footer Widget Area*/
+.footer-widget-area{
+    padding-right: 40px;
+}
+
+
+/* Site Header Menu */
+
+.site-header .mp-logo{
+    width: 180px;
+}
+
+/* Search Form */
+
+.site-header .hd-search label{
+    position: absolute;
+    left: -9999px;
+}
+
+.site-header .hd-search #s{
+    vertical-align: top;
+    padding: 3px 0;
+    width: 85%;
+}
+
+.site-header .hd-search #searchsubmit{
+    background-color: #006EC3;
+    color: #FFF;
+    padding: 6px 18px;
+    border: none;
+    vertical-align: top;
+    font-size: 13px;
+    margin: 0 0 0 7px;
+}
+
+.site-header .sign > div, 
+.site-header .user-data > div{
+    margin: 10px;
+}
+
+.site-header .sign.fixed,
+.site-header .user-data.fixed{
+    position: fixed;
+    top: 0;
+    /*top: 32px;*/
+    right: 0;
+    z-index: 999999;
+}
+
+/* Dropdown Menu Header */
+.site-header .dropdown {
+    float: left;
+}
+
+.site-header .dropdown .dropbtn {
+    font-size: 14px;    
+    border: none;
+    outline: none;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    padding: 0 0 10px;
+    color: #FFF;
+    text-decoration: none;
+    line-height: 26px;
+}
+
+.site-header .dropdown .dropdown-content {
+    display: none;
+    /*display: block;*/
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 30px;
+    right: 0;
+}
+
+.site-header .dropdown .dropdown-content:before{
+    border-bottom: 8px solid #f9f9f9;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    content: "";
+    display: inline-block;
+    right: 35px;
+    position: absolute;
+    top: -8px;
+}
+
+.site-header .sign .dropdown .form-wrap{
+    float: left;
+    width: 290px;
+    padding: 20px;
+}
+
+.site-header .sign .dropdown .form-wrap h4{
+    display: none;
+}
+
+.site-header .sign .dropdown .form-wrap form{
+    padding: 0;
+}
+
+.site-header .sign .dropdown .form-wrap form > div[class*="col"]{
+    padding: 0;
+    margin: 10px 0 0 0;
+}
+
+.site-header .sign .dropdown .form-wrap form > div[class*="col"].alert-warning{
+    padding: 10px;
+    font-size: 12px;
+}
+
+.site-header .sign .dropdown .form-wrap form > div[class*="col"]:first-child,
+.site-header .sign .dropdown .form-wrap form > div[class*="col"].sign-link{
+    margin: 0;
+}
+
+.site-header .sign .dropdown .form-wrap form > div.col-xs-5{
+    width: 100%;
+}
+
+.site-header .user-data{
+    color: #FFF;
+}
+
+.site-header .user-data .dropdown{
+    cursor: pointer;
+}
+
+.site-header .user-data .dropdown .dropdown-content{
+    right: -10px;
+}
+
+.site-header .user-data .dropdown .dropdown-content:before{
+    right: 7px;
+}
+
+.site-header .user-data .dropdown svg.fa-user{
+    font-size: 18px;
+    margin: 3px 0;
+}
+
+.site-header .user-data .dropdown .user-name{
+    margin: 0 10px;
+}
+
+.site-header .user-data .dropdown svg.fa-angle-down{
+    font-size: 20px;
+    margin-top: 3px;
+}
+
+.site-header .user-data .dropdown-content{
+    padding: 5px 0;
+}
+
+.site-header .user-data .dropdown-content a{
+    padding: 5px 10px;
+}
+
+.site-header .user-data .dropdown-content a:hover{
+    background-color: #ededed;
+    text-decoration: none;
+}
+
+
+
+/* Header Navs */
+.site-header .site-nav-wrap{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.site-header .site-nav-wrap nav{
+    background-color: #333;
+}
+
+.site-header .site-nav-wrap nav ul{
+    margin-left: 40px;
+}
+
+.site-header .site-nav-wrap nav ul li{
+    padding: 0;
+    text-align: center;
+}
+
+.site-header .site-nav-wrap nav ul li a:link,
+.site-header .site-nav-wrap nav ul li a:visited{
+    display: block;
+    text-decoration: none;
+    color: #FFF;
+    font-size: 14px;
+    line-height: 40px;
+    padding: 0 20px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 10px;
+}
+
+.site-header .site-nav-wrap nav ul li a:before {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4px;
+    background: #326ED9;
+    transform: translateX(-100%);
+    content: '';
+    position: absolute;
+    transition: transform .5s ease;
+}
+.site-header .site-nav-wrap nav ul li a:hover:before {
+    transform: translateX(0);
+}
+
+.site-header .site-nav-wrap nav ul li.current-menu-item a:after{
+    content:'';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #326ED9;
+    width: 100%;
+    height: 4px;
+    opacity: 100;
+}
+
+/*.site-header .site-nav-wrap nav ul li:hover a:link{
+    background-color: #999;
+}*/
+
+.site-header .site-nav-wrap nav.fixed{
+    position: fixed;
+    /*top: 32px;*/
+    top: 0;
+    left: 0;
+    margin: 0;
+    width: 100%;
+    z-index: 9999;
+    color: white;
+}
+
+.site-header .site-nav-wrap nav.fixed .logo{
+    float: left;
+    margin: 8px 0;
+    padding: 0 15px 0 10px;
+    border-right: 1px solid #FFF;
+}
+
+.site-header .site-nav-wrap nav.fixed svg{
+    font-size: 20px;
+    margin-top: 2px;
+}
+
+.site-header .site-nav-wrap nav.fixed span{
+    margin-left: 7px;
+    vertical-align: top;
+    line-height: 24px;
+}
+
+
+
+/* Site Footer Menu */
+.site-footer ul{
+    list-style: none;
+    padding: 0;
+}
+
+.site-footer ul li{
+   font-size: 12px;
+}
+
+.site-footer ul li:first-child{
+   
+}
+
+.site-footer ul li:last-child{
+
+}
+
+
+/* One Column Title Layout */
+div.title-column h3{
+    border-bottom: 1px solid #EDEDED;
+    padding-bottom: 10px;
+    margin-top: 30px;
+}
+
+div.text-column p{
+    margin-top: 10px;
+}
+
+div.card{
+    min-height: 410px;
+    text-align: center;
+    cursor: pointer;
+    background-position: -80px -130px;
+}
+
+@-webkit-keyframes mymove {
+    from {left: 0px;}
+    to {left: 300px;}
+}
+
+/* Standard syntax */
+@keyframes mymove {
+    from {left: 0px;}
+    to {left: 300px;}
+}
+
+div.card a img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+}
+
+div.card a span{
+    font-size: 17px;
+    float: left;
+    position: relative;
+    color: #000;
+    font-style: italic;
+    margin: 220px 0 0 160px;
+    /* text-align: center; */
+    width: 160px;
+    transform:rotate(-10deg);
+}
+
+/* Post Styles */
+p.post-info{
+    font-size: 87%;
+    color: #999;
+}
+
+p.post-info a:link,
+p.post-info a:visited{
+    color: #999;
+}
+
+/* Image Styles */
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+.post.has-thumbnail{
+    position: relative;
+    padding-left: 200px;
+}
+
+.post .post-thumbnail{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Aside Styles */
+article.post{
+    margin-bottom: 20px;
+}
+
+article.post-aside,
+article.post-link{
+    font-size: 125%;
+    background-color: #FFF5CB;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px rgba(0,0,0,.1);
+}
+article .mini-meta{
+    font-size: 68%;
+    margin: 0;
+    color: #777;
+}
+
+/* Link Styles */
+article.post-link{
+    padding: 0;
+    background-color: #E0EBFF;
+}
+article.post-link a{
+    display: block;
+    padding: 20px;
+}
+
+/* Gallery Styles */
+article.post-gallery{
+    background-color: #222;
+    color: #FFF;
+    padding: 20px;
+}
+
+article.post-gallery h2{
+    text-align: center;
+}
+
+article.post-gallery img{
+    border: none!important;
+}
+
+
+/* Consultation Form */
+form > div[class*="col"]{
+    margin-top: 15px;
+}
+
+form > div[class*="col"].terms{
+    margin-top: 5px;
+}
+
+form textarea.form-control{
+    min-height: 140px;
+}
+
+form input.error, 
+form textarea.error{
+    border: 1px solid #AD4442;
+}
+
+form input[type="submit"]{
+    padding: 10px 25px;
+    background-color: #006EC3;
+    color: #FFF;
+    border: none;
+    vertical-align: top;
+    margin: 10px 0 20px;
+    font-size: 17px;
+}
+
+form button.submit{
+    height: 44px;
+    font-size: 15px;
+    margin: 10px 0px;
+}
+
+form input[type="submit"]:hover{
+    background-color: #4FC3F7;
+}
+
+form .asterisk{
+    color: red;
+}
+
+form label[for="terms"]{
+    margin: 0;
+}
+
+form small.error{
+    color: #a94442;
+}
+
+form .char-count{
+    font-size: 12px;
+    color: #999;
+}
+
+
+/* Sign Styles */
+.form-wrap h4{
+    margin: 20px 0 10px;
+    border-bottom: 1px solid #EDEDED;
+    padding: 0 0 7px 0;
+}
+
+.form-wrap #fb-login-btn,
+.form-wrap #fb-register-btn{
+    float: left;
+    width: 250px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #4468B0;
+    color: #FFF;
+    font-size: 15px;
+    margin: 40px 70px 0;
+}
+
+.form-wrap #fb-login-btn svg,
+.form-wrap #fb-register-btn svg{
+    font-size: 25px;
+    margin: 0 10px 0 2px;
+}
+
+.form-wrap #fb-login-btn span,
+.form-wrap #fb-register-btn span{
+    line-height: 25px;
+}
+
+.form-wrap .sign-link{
+    margin: 0;
+}
+
+.form-wrap .sign-link a{
+    font-size: 12px;
+}
+
+
+/* Modal Dialog Login Form */
+.modal-dialog{
+    width: 700px;
+}
+
+.modal-dialog .modal-content{
+    padding: 20px;
+}
+
+.modal-dialog .modal-content .modal-header{
+    border: none;
+    padding: 0;
+}
+
+.modal-dialog .modal-content .modal-header button.close{
+    position: absolute;
+    right: 7px;
+    top: 5px;
+    z-index: 10;
+    margin: 0;
+}
+
+.modal-dialog .modal-content .modal-body{
+    display: inline-block;
+    padding: 0;
+}
+
+.modal-dialog .modal-content .modal-body h4{
+    margin: 10px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ededed;
+}
+
+.modal-dialog .modal-content .modal-body .sign-link{
+    margin: 0;
+}
+
+.modal-dialog .modal-content .modal-body .sign-link a{
+    font-size: 12px;
+}
+
+
+/* Modal Dialog Packs */
+.modal-dialog.packs-modal .modal-content h3{
+    font-size: 19px;
+    margin: 10px 0 0;
+}
+.modal-dialog.packs-modal .modal-content p{
+    font-style: italic;
+    font-size: 13px;
+}
+.modal-dialog.packs-modal .modal-content .pack{
+    margin: 20px 0;
+}
+.modal-dialog.packs-modal .modal-content .pack img{
+    width: 100px;
+}
+
+.modal-dialog.packs-modal .modal-content .pack .media-body h4{
+    margin: 11px 0 7px;
+    padding: 0;
+    font-size: 17px;
+    font-weight: 700;
+    border: none;
+}
+
+.modal-dialog.packs-modal .modal-content .pack .media-body p{
+    font-size: 12px;
+}
+
+.modal-dialog.packs-modal .modal-content .pack .media-body p{
+    margin: 0 0 20px;
+    font-size: 13px;
+}
+
+.modal-dialog.packs-modal .modal-content .pack .media-body .price{
+    display: flex;
+}
+
+.modal-dialog.packs-modal .modal-content .pack .media-body .price span{
+    float: none;
+    display: block;
+    margin: auto;
+    width: 75px;
+    text-align: center;
+    font-size: 11px;
+    margin-bottom: 10px;
+    line-height: 15px;
+}
+
+.modal-dialog.packs-modal .modal-content .pack .media-body .price span b{
+    font-size: 16px;
+}
+
+.modal-dialog.packs-modal .modal-content .pack .media-body .media-btn a{
+  background: #54c2b9;
+  background-image: -webkit-linear-gradient(top, #54c2b9, #077573);
+  background-image: -moz-linear-gradient(top, #54c2b9, #077573);
+  background-image: -ms-linear-gradient(top, #54c2b9, #077573);
+  background-image: -o-linear-gradient(top, #54c2b9, #077573);
+  background-image: linear-gradient(to bottom, #54c2b9, #077573);
+  -webkit-border-radius: 7;
+  -moz-border-radius: 7;
+  border-radius: 7px;
+  text-shadow: 1px 1px 3px #666666;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  padding: 7px 10px;
+  text-decoration: none;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.modal-dialog.packs-modal .modal-content .pack .media-body .media-btn a:hover {
+  background: #8fd8ce;
+  background-image: -webkit-linear-gradient(top, #8fd8ce, #1facac);
+  background-image: -moz-linear-gradient(top, #8fd8ce, #1facac);
+  background-image: -ms-linear-gradient(top, #8fd8ce, #1facac);
+  background-image: -o-linear-gradient(top, #8fd8ce, #1facac);
+  background-image: linear-gradient(to bottom, #8fd8ce, #1facac);
+  text-decoration: none;
+}
+
+.modal-dialog.packs-modal .modal-content .pack .media-body .media-btn .mp-cards{
+    background: url(https://mesaprofesional.com/wp-content/uploads/2018/04/mp-cards-logos.png);
+    background-position: -4px -5px;
+    float: left;
+    width: 142px;
+    height: 18px;
+}
+
+
+/* Professionals REgister Modal Styles */
+.modal-dialog.professionals-register-modal{
+    font-size: 13px;
+}
+
+.modal-dialog.professionals-register-modal .modal-content h3{
+    font-size: 19px;
+    margin: 10px 0 0;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #ededed;
+}
+
+.modal-dialog.professionals-register-modal{
+    width: 800px;
+}
+
+.modal-dialog.professionals-register-modal .modal-content .modal-body{
+    margin-top: 15px;
+}
+
+.modal-dialog.professionals-register-modal .modal-content .modal-body ol{
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.modal-dialog.professionals-register-modal .modal-content .modal-body p{
+    margin: 0px 0 20px;
+}
+
+.modal-dialog.professionals-register-modal .modal-content .modal-footer{
+    padding: 0;
+    border-top: none;
+}
+
+
+/* Questions Home Styles*/
+article.posts .questions{
+    margin-bottom: 20px;
+}
+
+article.posts .questions .question{
+    margin: 10px 0;
+}
+
+article.posts .questions .question:first-child{
+    margin-top: 0;
+}
+
+article.posts .questions .question.even{
+    background-color: #a9e1f9;
+}
+
+article.posts .questions .question.odd{
+    background-color: #92c4f9;
+}
+
+article.posts .questions .question .question-inner{
+    padding: 10px 10px 15px 10px;
+}
+
+article.posts .questions .question .question-inner .user-image{
+    position: relative;
+    margin-left: 5px;
+}
+
+article.posts .questions .question .question-inner .user-image img{
+    width: 20px;
+    margin-top: 10px;
+}
+
+article.posts .questions .question .question-inner .user-image svg{
+    color: white;
+    position: absolute;
+    top: 0;
+    right: -10px;
+}
+
+article.posts .questions .question .question-content{
+    padding-left: 20px;
+}
+
+article.posts .questions .question .question-content .user-name{
+    font-size: 12px;
+}
+
+article.posts .questions .question .question-content .user-name span{
+    font-style: italic;    
+}
+
+article.posts .questions .question .question-content .user-name a{
+    
+}
+
+article.posts .questions .question .question-content .question-date{
+    font-size: 10px;
+    font-style: italic;
+    color: #666;
+}
+
+article.posts .questions .question .question-content .question-date span{
+    text-transform: capitalize;
+}
+
+article.posts .questions .question .question-content .question-text{
+    color: #333;
+    font-weight: bolder;
+    margin-top: 10px;
+    line-height: 17px;
+}
+
+article.posts .questions .question .question-content .answer-label{
+    font-size: 11px;
+}
+
+article.posts .questions .question .answer-inner{
+    background-color: #ffdea6;
+    padding: 15px 35px;
+}
+
+article.posts .questions .question .answer-inner .fa-level-up-alt{
+    transform: rotate(90deg);
+    color: #999;
+    margin-top: -2px;
+}
+
+article.posts .questions .question .answer-inner .user-image{
+    position: relative;
+}
+
+article.posts .questions .question .answer-inner .user-image img{
+    width: 15px;
+    margin: 5px 0 0 10px;
+}
+
+article.posts .questions .question .answer-inner .user-image svg{
+    position: absolute;
+    top: -2px;
+    right: -13px;
+    color: #FFF;
+}
+
+article.posts .questions .question .answer-inner .answer-content{
+    padding: 0 10px 0 25px;
+}
+
+article.posts .questions .question .answer-inner .answer-content .answer-text{
+    font-size: 12px;
+}
+
+article.posts .questions .question .answer-inner .answer-content .answer-user-name{
+    font-size: 10px;
+    color: #999;
+}
+
+article.posts .questions .question .answer-rating{
+    background-color: #FFE2CF;
+    padding: 0 15px 30px 15px;
+}
+
+article.posts .questions .question .answer-rating .offset{
+    width: 80%;
+    margin: 0 65px 0 0;
+}
+
+article.posts .questions .question .answer-rating .offset h6{
+    font-weight: 700;
+    margin-bottom: 3px;
+    border-top: 1px dotted #999;
+    padding-top: 10px;
+}
+
+article.posts .questions .question .answer-rating .offset h6 span{
+    font-weight: 100;
+    font-style: italic; 
+}
+
+article.posts .questions .question .answer-rating .offset .professional-icon small{
+    font-size: 11px;
+}
+
+article.posts .questions .question .answer-rating .rating-content{
+    margin-top: 15px;
+}
+
+article.posts .questions .question .answer-rating .rating-content .stars{
+    margin: 0 10px;
+}
+
+article.posts .questions .question .answer-comments{
+    margin-top: 10px;
+}
+
+article.posts .questions .question .answer-comments p{
+    margin-top: 5px;
+    font-size: 10px;
+}
+
+article.posts .questions .question .answer-comments textarea{
+    padding: 10px;
+    height: 120px;
+    margin: 10px 0;
+}
+
+article.posts .questions .question .submit{
+    margin: 10px 0 0;
+}
+
+article.posts .questions .question .submit button{
+    width: 90px;
+    float: left;
+}
+
+article.posts .questions .question .status{
+    display: inline-block;
+    font-size: 12px;
+    margin-left: 15px;
+    float: left;
+}
+
+article.posts .questions .question .status.success{
+    line-height: 34px;
+}
+
+article.posts .questions .question .status.error{
+    line-height: 15px;
+}
+
+article.posts .questions .question .status svg{
+    font-size: 17px;
+    top: 1px;
+    position: relative;
+}
+
+article.posts .questions .question .status span{
+    margin-left: 5px;
+}
+
+
+
+/* Professionals Forms Styles */
+article.professionals-sign .form-wrap{
+
+}
+article.professionals-sign .form-wrap .register-form{
+    
+}
+article.professionals-sign .form-wrap h5{
+    text-align: center;
+    font-size: 21px;
+    margin-bottom: 30px;
+}
+
+
+/* Dashboard Styles */
+.dashboard .sidebar{
+    background-color: #efefef;
+    overflow: scroll;
+}
+
+.dashboard .sidebar.fixed{
+    position: fixed;
+    top: 41px;
+    left: 0;
+    max-height: 620px;
+    overflow: scroll;
+}
+
+.dashboard .sidebar .new-questions-qty{
+    text-align: center;
+    padding: 5px 0;
+    background-color: #5cb85c;
+    border-radius: 30px;
+    color: #fff;
+    font-weight: 100;
+    margin: 5px;
+    width: 95%;
+}
+
+.dashboard .sidebar ul li:first-child{
+    border-top: none;
+}
+
+.dashboard .sidebar ul li a.question{
+    padding: 15px;
+    border-top: 1px solid #bbb;
+}
+
+.dashboard .sidebar ul li a.question.odd{
+    background-color: #f9f9f9;
+}
+
+.dashboard .sidebar ul li a.question.even{
+    background-color: #fff;
+}
+
+.dashboard .sidebar ul li a.question.new{
+    background-color: #ccc;
+}
+
+.dashboard .sidebar ul li a.question:hover{
+    background-color: #ddd;
+}
+
+.dashboard .sidebar ul li a.question.selected{
+    background-color: #ededed;
+}
+
+.dashboard .sidebar ul li:first-child a.question{
+    border-top: none;
+}
+
+.dashboard .sidebar ul li a.question .user-name{
+    font-size: 12px;
+}
+
+.dashboard .sidebar ul li a.question .question-date{
+    font-size: 10px;
+    color: #666;
+    font-style: italic;
+}
+
+.dashboard .sidebar ul li a.question .question-date span{
+    text-transform: capitalize;
+}
+
+.dashboard .sidebar ul li a.question .question-text{
+    color: #333;
+    font-size: 12px;
+    font-weight: 100;
+    margin-top: 7px;
+    line-height: 15px;
+}
+
+.dashboard .sidebar ul li a.question.new .question-text{
+    font-weight: 700;
+}
+
+.dashboard .sidebar ul li a.question .status-detail{
+    font-size: 10px;
+}
+
+.dashboard .sidebar ul li a.question .status-detail.answered-by{
+    margin-top: 10px;
+}
+
+.dashboard .sidebar ul li a.question .status-detail svg{
+    float: left;
+}
+
+.dashboard .sidebar ul li a.question .status-detail span{
+    color: #999;
+    float: left;
+}
+
+.dashboard .sidebar ul li a.question .status-detail span{
+    margin-left: 3px;
+}
+
+.dashboard .sidebar ul li a.question .status-detail svg{
+    margin-top: 1px;   
+}
+
+.dashboard .sidebar ul li a.question .status-detail svg.text-danger{
+    color: #a94442;
+}
+
+.dashboard .main .question-detail h4{
+    padding-bottom: 7px;
+    border-bottom: 1px solid #EDEDED;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.dashboard .main .question-detail .question-text,
+.dashboard .main .question-detail .answer-text{
+    width: 100%;
+    min-height: 120px;
+    font-size: 12px;
+}
+
+.dashboard .main .question-detail .user-name,
+.dashboard .main .question-detail .user-email,
+.dashboard .main .question-detail .question-date,
+.dashboard .main .question-detail .question-link{
+    font-size: 12px;
+}
+
+.dashboard .main .question-detail .panel .panel-body{
+    padding: 15px 20px 20px;
+}
+
+.dashboard .main .question-detail .panel .panel-body .question-content{
+    margin-top: 7px;
+    padding: 10px 0 0;
+    border-top: 1px solid #EDEDED;
+}
+
+.dashboard .main .question-detail .panel .panel-body .answer-content{
+    margin-top: 13px;
+}
+
+.dashboard .main .question-detail .panel .panel-body .mail-content{
+    margin-top: 10px;
+}
+
+.dashboard .main .question-detail .panel .panel-body .mail-content label{
+    font-weight: 100;
+    font-size: 13px;
+}
+
+.dashboard .main .question-detail .panel .ld-spin{
+    font-size: 48px;
+    color: #999;
+}
+
+.dashboard .main .filters #searchform label{
+    display: none;
+}
+
+.dashboard .main .filters #searchform #searchsubmit{
+    padding: 5px 10px;
+    font-size: 12px;
+    margin: 0 0 0 10px;
+}
+
+.dashboard .main .question-detail .panel .panel-bottom{
+    margin-top: 20px;
+}
+
+.dashboard .main .question-detail .panel .panel-bottom .status{
+    display: inline-block;
+    font-size: 12px;
+    margin-left: 15px;
+}
+
+.dashboard .main .question-detail .panel .panel-bottom .status .fa-check{
+    font-size: 17px;
+    top: 1px;
+    position: relative;
+}
+
+.dashboard .main .question-detail .panel .panel-bottom .status span{
+    margin-left: 5px;
+}
+
+.dashboard .main .question-detail .panel .panel-bottom .btn-success .ld-spin{
+    font-size: 17px;
+    color: #FFF;
+}
+
+
+
+/* Ranking Styles */
+span.stars, span.stars span {
+    display: block;
+    background: url(https://mesaprofesional.com/wp-content/uploads/2018/03/stars.png) 0 -16px repeat-x;
+    width: 80px;
+    height: 16px;
+}
+
+span.stars span {
+    background-position: 0 0;
+}
+
+.professionals-box{
+    min-height: 700px;
+}
+
+.professionals-box h5{
+    text-align: center;
+    border-bottom: 1px solid #dedede;
+    padding-bottom: 5px;
+}
+
+.professionals-box .professional-info{
+    margin-top: 10px;
+    display: table;
+    height: 25px;
+}
+
+.professionals-box .professional-info img{
+    width: 15px;
+    vertical-align: middle;
+    display: table-cell;
+    padding: 5px 0;
+}
+
+.professionals-box .professional-info .prof-name{
+    font-size: 12px;
+    margin-left: 7px;
+    line-height: 13px;
+    font-weight: bold;
+    width: 100px;
+    word-wrap: break-word;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.professionals-box .professional-info .jrating{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.professionals-box .professional-info .jrating .rating{
+    width: 80px;
+    float: right;
+    position: relative;
+}
+
+.professionals-box .professional-info .jrating .rating small{
+    font-size: 9px;
+    margin-left: 4px;
+    position: absolute;
+    top: 3px;
+    left: -18px;
+}
+
+/* ABM Professionals Styles */
+.abm .list{
+    margin-top: 20px;
+}
+
+.abm h3{
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.abm h4{
+    border-bottom: 1px solid #ededed;
+    padding-bottom: 7px;
+    margin-bottom: 20px;
+}
+
+.abm table tr {
+    font-size: 12px;
+}
+
+.abm table thead th{
+    background-color: #ededed;
+    color: #333;
+}
+
+.abm table tbody tr td{
+    position: relative;
+}
+
+.abm table.table>tbody>tr>td, 
+.abm table.table>tbody>tr>th, 
+.abm table.table>tfoot>tr>td, 
+.abm table.table>tfoot>tr>th, 
+.abm table.table>thead>tr>td, 
+.abm table.table>thead>tr>th{
+    vertical-align: middle;
+}
+
+.abm table tr td:nth-child(5){
+    font-style: italic;
+}
+
+.abm table tr .ld-spin{
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.abm table tr .status{
+    position: absolute;
+    top: 16px;
+    left: 75px;
+}
+
+.abm table tr .status span{
+    margin-left: 3px;
+}
+
+.abm .pending table tr.odd{
+    background-color: #f5f4e1;
+}
+
+.abm .pending table tr.even{
+    background-color: #efeed1;
+}
+
+.abm .authorized table tr.odd{
+    background-color: #d1f3da;
+}
+
+.abm .authorized table tr.even{
+    background-color: #c3e6cb;
+}
+
+.abm .unauthorized table tr.odd{
+    background-color: #ecd9d9;
+}
+
+.abm .unauthorized table tr.even{
+    background-color: #e4c8cb;
+}
+
+.abm .no-results{
+    padding: 10px;
+    text-align: center;
+    background-color: #ededed;
+    font-size: 12px;
+    font-style: italic;
+    color: #666;
+}
+
+.abm .submit{
+    margin-top: 20px;
+}
+
+.abm .submit .status{
+    line-height: 34px;
+    margin-right: 20px;
+    font-size: 12px;
+}
+
+.abm .submit .status svg{
+    margin-right: 5px;
+}
+
+
