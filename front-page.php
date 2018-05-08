@@ -37,7 +37,7 @@
                     </p>
                 </div>
                 <?php $updateData = ['first_time'=>0];?>
-                <?php $sentEmail = sendFacebookRegisterEmail([
+                <?php $sentEmail = sendClientFacebookRegisterEmail([
                     'to'        => $user->email,
                     'firstName' => $user->first_name,
                     'lastName'  => $user->last_name

@@ -687,7 +687,7 @@ function buildPreferenceData($data){
 
 
 
-function sendFacebookRegisterEmail($data) {
+function sendClientFacebookRegisterEmail($data) {
     $link       = home_url('/');
     $subject    = '¡Gracias por registrarse a Mesa Profesional!';
 
@@ -709,7 +709,7 @@ function sendFacebookRegisterEmail($data) {
 }
 
 
-function sendRegisterEmail($data){
+function sendClientRegisterEmail($data){
     $link = home_url('/accounts?token='.$data['accountToken']);
     $subject = '¡Gracias por registrarse a Mesa Profesional!';
 

@@ -36,7 +36,7 @@
 
                     if($success){
                         $data['to'] = $data['email'];
-                        $emailSended = sendRegisterEmail($data);
+                        $emailSended = sendClientRegisterEmail($data);
                         if($emailSended){
                             $wpdb->update($usersTable, ['mail_sent'=>1], ['email'=>$data['email']]);
                         }
