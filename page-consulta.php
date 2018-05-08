@@ -4,11 +4,8 @@
     //dd($mp->create_test_user());
     //dd($mp->get_payment_info('3649850873'));
 
-
     date_default_timezone_set("America/Argentina/Buenos_Aires");
     setlocale(LC_TIME, 'es_ES');
-    
-
 
     if (!empty($_POST)) {
         $hasError = false;
@@ -72,8 +69,6 @@
             }
         }
 
-
-        
         //dd($data);
 
         if(!$hasError) {
@@ -102,50 +97,19 @@
                     //dd($success);
 
                     if($success){
-
-                        // email
-                        $emailTo = $data['email'];
-                        if (!isset($emailTo) || ($emailTo == '') ){
-                            $emailTo = get_option('admin_email');
+                        $sendedEmail = sendClientConsultationEmail([
+                            'to'            => $data['email'],
+                            'firstName'     => $data['firstName'],
+                            'lastName'      => $data['lastName'],
+                            'question'      => $data['question'],
+                            'linkToDetail'  => home_url('/questions?token='.$questionToken)
+                        ]);
+                        if($sendedEmail){
+                            $wpdb->update($questionsTable, ['mail_sent'=>1], ['token'=>$questionToken]);
                         }
-
-                        $link = home_url('/questions?token='.$questionToken);
-
-                        $subject = '¡Gracias por su consulta en Mesa Profesional!';
-                        
-                        $body  = 'Hola '.$data['firstName'].' '.$data['lastName']. '!<br><br>';
-                        $body .= 'Gracias por consultarnos, hemos recibido su consulta y la estaremos analizando a la brevedad.<br><br>';
-                        $body .= 'Su pregunta fue la siguiente:<br><br>';
-                        $body .= '<i>'.$data['question'].'</i><br><br><br>';
-                        $body .= 'Cuando uno de nuestros profesionales responda su consulta, le avisaremos con un correo electrónico. A continuación, le damos un link a nuestra página donde podrá ver su consulta y verificar si le han respondido o no:<br>';
-                        $body .= $link.'<br><br>';
-                        $body .= '<b>Importante: Recuerde que las primeras 5 preguntas son gratuitas</b>, después puede comprar packs de 5 o 10 preguntas para seguir consultándonos.<br>';
-
-                        if($remainingQuestions = hasQuestions()){
-                            if($remainingQuestions == 1){
-                                $body .= 'Aún tiene '.$remainingQuestions.' pregunta restante.<br><br>';
-                            } else {
-                                $body .= 'Aún tiene '.$remainingQuestions.' preguntas restantes.<br><br>';
-                            }                    
-                            
-                        } else {
-                            $body .= 'Usted ya no dispone de preguntas gratuitas, puede aprovechar y comprar nuestros packs de 5 y 10 preguntas.<br><br>';
-                        }
-                        
-                        $body .= 'Lo saluda atentamente,<br>';
-                        $body .= 'El equipo de <a href="'.home_url('/').'">Mesa Profesional</a>';
-
-                        $body = htmlspecialchars_decode($body);
-
-                        wp_mail($emailTo, $subject, $body, $headers);
-                        $emailSent = true;
-                        $wpdb->update($questionsTable, ['mail_sent'=>1], ['token'=>$questionToken]);
-                    }
-                    else {
+                    } else {
                         $hasError = true;
                     }
-                } else {
-                    $emailSent = true;
                 }
             }
             else {
@@ -167,14 +131,16 @@
 
 if(have_posts()):
     while (have_posts()): the_post(); ?>
+
         <?php if(isset($hasError) && false===$hasError):?>
         <div class="alert alert-success" role="alert">
             <div class="title"><b>Hemos recibido tu consulta satisfactoriamente!</b></div>
-            <?php if($emailSent):?>
+            <?php if(!empty($sendedEmail)):?>
             <p>Te hemos enviado un email donde tendrás una dirección para que puedas ver tu consulta y la respuesta de los profesionales.</p>
             <?php endif;?>
         </div>
         <?php endif;?>
+
 
         <?php if(isset($hasError) && true===$hasError && !empty($warningTitle)):?>
         <div class="alert alert-warning" role="alert">
@@ -355,7 +321,8 @@ if(have_posts()):
                                                         <p class="col-xs-12 no-padding"><?php echo $pack->description;?></p>
                                                     </div>
                                                     <div class="col-xs-3 no-padding">
-                                                        <?php 
+                                                        <?php
+                                                            $aliasForPayment = ($userDataArray[3] == 'mail@test.com') ? 'test_user_63938795@testuser.com' : $userDataArray[3];
                                                             $preference_data = buildPreferenceData([
                                                                 'itemId'            => $pack->id,
                                                                 'itemTitle'         => $pack->title,
@@ -364,7 +331,7 @@ if(have_posts()):
                                                                 'itemPrice'         => $pack->price,
                                                                 'payerFirstName'    => $userDataArray[1],
                                                                 'payerLastName'     => $userDataArray[2],
-                                                                'payerEmail'        => $userDataArray[3],
+                                                                'payerEmail'        => $aliasForPayment,
                                                                 'urlSuccess'        => home_url('/mercadopago/callback'),
                                                                 'urlPending'        => home_url('/'),
                                                                 'urlFailure'        => home_url('/mercadopago/callback'),
@@ -412,7 +379,7 @@ if(have_posts()):
                                                         <?php else:?>
                                                             <div class="col-xs-12 price"><span>A sólo <b>$<?php echo $pack->price;?></b></span></div>
                                                             <div class="col-xs-12 no-padding media-btn">
-                                                                <a class="col-xs-8 col-xs-offset-2" href="<?php echo $preference['response']['init_point']; ?>" class="mercado-pago-btn" name="MP-Checkout" mp_mode="redirect" target="_blank">Comprar</a>
+                                                                <a class="col-xs-8 col-xs-offset-2" href="<?php echo $preference['response']['init_point']; ?>" name="MP-Checkout" mp_mode="redirect" target="_blank">Comprar</a>
                                                                 <span class="mp-cards"></span>
                                                             </div>
                                                         <?php endif;?>

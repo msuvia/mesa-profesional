@@ -773,5 +773,36 @@ function sendProfessionalDeniedAuthorizationEmail($data){
 }
 
 
+function sendClientConsultationEmail($data){
+    $subject = '¡Gracias por su consulta en Mesa Profesional!';
+
+    $body  = 'Hola '.$data['firstName'].' '.$data['lastName']. '!<br><br>';
+    $body .= 'Gracias por consultarnos, hemos recibido su consulta y la estaremos analizando a la brevedad.<br><br>';
+    $body .= 'Su pregunta fue la siguiente:<br><br>';
+    $body .= '<i>'.$data['question'].'</i><br><br><br>';
+    $body .= 'Cuando uno de nuestros profesionales responda su consulta, le avisaremos con un correo electrónico. A continuación, le damos un link a nuestra página donde podrá ver su consulta y verificar si le han respondido o no:<br>';
+    $body .= $data['linkToDetail'].'<br><br>';
+    $body .= '<b>Importante: Recuerde que las primeras 5 preguntas son gratuitas</b>, después puede comprar packs de 5 o 10 preguntas para seguir consultándonos.<br>';
+
+    if($remainingQuestions = hasQuestions()){
+        if($remainingQuestions == 1){
+            $body .= 'Aún tiene '.$remainingQuestions.' pregunta restante.<br><br>';
+        } else {
+            $body .= 'Aún tiene '.$remainingQuestions.' preguntas restantes.<br><br>';
+        }
+
+    } else {
+        $body .= 'Usted ya no dispone de preguntas gratuitas, puede aprovechar y comprar nuestros packs de 5 y 10 preguntas.<br><br>';
+    }
+
+    $body .= 'Lo saluda atentamente,<br>';
+    $body .= 'El equipo de <a href="'.home_url('/').'">Mesa Profesional</a>';
+
+    $body = htmlspecialchars_decode($body);
+
+    return wp_mail($data['to'], $subject, $body);
+}
+
+
 
 ;?>
