@@ -17,8 +17,7 @@
             <div class="col-xs-12 alert alert-success" role="alert">
                 <div class="title"><b>¡Bienvenido a Mesa Profesional!</b></div>
                 <p>
-                    Ya se encuentra habilitado para contactarse con nuestros profesionales y obtener la mejor respuesta a su consulta.<br>
-                    Antes que nada debe iniciar sesión, para ello puede hacerlo en la parte superior derecha o haciendo click <a href="<?php echo home_url('/login');?>">aquí</a>.<br>
+                    Ya se encuentra habilitado para contactarse con nuestros profesionales y obtener la mejor respuesta a su consulta. Antes que nada debe iniciar sesión, para ello puede hacerlo en la parte superior derecha o haciendo click <a href="<?php echo home_url('/login');?>">aquí</a>.<br>
                     Esperamos que nuestro sitio le resulte útil. Muchas gracias, el equipo de Mesa Profesional.
                 </p>
             </div>
@@ -37,12 +36,15 @@
                         Esperamos que nuestro sitio le resulte útil. Muchas gracias, el equipo de Mesa Profesional.
                     </p>
                 </div>
-                <?php sendFacebookRegisterEmail([
+                <?php $updateData = ['first_time'=>0];?>
+                <?php $sentEmail = sendFacebookRegisterEmail([
                     'to'        => $user->email,
                     'firstName' => $user->first_name,
                     'lastName'  => $user->last_name
                 ]);?>
-                <?php $wpdb->update('users',['first_time'=>0],['email'=>$userDataArray[3]]);?>
+
+                <?php if($sentEmail){$updateData['mail_sent']=1;};?>
+                <?php $wpdb->update('users',$updateData,['email'=>$userDataArray[3]]);?>
             <?php endif;?>
         <?php endif;?>
 

@@ -8,58 +8,42 @@
     if(!empty($_POST)){
         $usersTable = 'users';
         $rolesTable = 'roles';
+        date_default_timezone_set("America/Argentina/Buenos_Aires");
+        setlocale(LC_TIME, 'es_ES');
+
         $registerType=(!empty($_POST['registerType'])) ? $_POST['registerType'] : 'local';
         if($registerType=='local'){
             $validate = validateRegisterForm();
             if(!$validate['error']) {
                 // database
                 global $wpdb;
-                $accountToken = generateToken(20);
                 $data = $validate['data'];
-
                 $user = $wpdb->get_row( 'SELECT * FROM '.$usersTable.' WHERE email = "'.$data['email'].'"');
-
                 if(!$user) {
-                    date_default_timezone_set("America/Argentina/Buenos_Aires");
-                    setlocale(LC_TIME, 'es_ES');
+                    $data['accountToken'] = generateToken(20);
+
                     $rol = $wpdb->get_row( 'SELECT * FROM '.$rolesTable.' WHERE name = "'.decryptIt($data['type']).'"');
                     $success=$wpdb->insert($usersTable, [
                         'first_name'    => $data['firstName'],
                         'last_name'     => $data['lastName'],
                         'email'         => $data['email'],
                         'password'      => encryptIt($data['password']),
-                        'token'         => $accountToken,
+                        'token'         => $data['accountToken'],
                         'rol'           => $rol->id,
                         'server'        => json_encode($_SERVER),
                         'timestamp'     => date('Y-m-d H:i:s', time())
                     ]);
 
                     if($success){
-                        $emailTo = $data['email'];
-                        if (!isset($emailTo) || ($emailTo == '') ){
-                            $emailTo = get_option('admin_email');
+                        $data['to'] = $data['email'];
+                        $emailSended = sendRegisterEmail($data);
+                        if($emailSended){
+                            $wpdb->update($usersTable, ['mail_sent'=>1], ['email'=>$data['email']]);
                         }
-
-                        $link = home_url('/accounts?token='.$accountToken);
-
-                        $subject = '¡Gracias por registrarse a Mesa Profesional!';
-                        
-                        $body  = 'Hola '.$data['firstName'].' '.$data['lastName']. '!<br><br>';
-                        $body .= 'Gracias por registrarte a Mesa Profesional.<br><br>';
-                        $body .= 'Antes de empezar a realizar consultas en nuestro sitio es necesario que actives tu cuenta haciendo click <a href="'.$link.'">aquí</a>.<br><br>';
-                        $body .= 'Si el link no funciona, copia este código en la barra del navegador:<br>';
-                        $body .= $link.'<br><br>';
-                        $body .= 'Lo saluda atentamente<br>';
-                        $body .= 'El equipo de <a href="'.home_url('/').'">Mesa Profesional</a>';
-                        
-                        $body = htmlspecialchars_decode($body);
-
-                        wp_mail($emailTo, $subject, $body, $headers);
-                        $success = true;
-                        $wpdb->update($usersTable, ['mail_sent'=>1], ['email'=>$data['email']]);
+                    } else {
+                        $warning = 'Hubo un problema en el guardado de sus datos, por favor, intente nuevamente y si persiste, contáctese con los administradores.';
                     }
-                }
-                else {
+                } else {
                     $warning = 'El email de registro ya se encuentra en uso, por favor elija otro y vuelva a registrarse.';
                 }
             }
@@ -78,7 +62,8 @@
                     'picture_url'       => $fbUser['picture']['data']['url'],
                     'actived_account'   => 1,
                     'rol'               => 3,
-                    'server'            => json_encode($_SERVER)
+                    'server'            => json_encode($_SERVER),
+                    'timestamp'         => date('Y-m-d H:i:s', time())
                 ]);
                 if($success){
                     echo json_encode(['status'=>'OK']);die;
@@ -107,13 +92,15 @@
 if(have_posts()):
     while (have_posts()): the_post(); ?>
         
-        <?php if(isset($success) && true===$success):?>
+        <?php if(!empty($success)):?>
         <div class="col-xs-10 col-xs-offset-1 alert alert-success" role="alert">
             <b>Sus datos se han guardado satisfactoriamente</b>
+            <?php if(!empty($emailSended)):?>
             <p>
-                Hemos enviado un email a su casilla de correo para que pueda activar su cuenta, por favor, revíselo y siga las instrucciones<br>
-                <b>Importante:</b> Recuerde verificar su casilla de correo no deseado.
+                Hemos enviado un email a su casilla de correo para que pueda activar su cuenta, por favor, revíselo y siga las instrucciones.<br>
+                <b>Importante:</b> Recuerde verificar su casilla de correo no deseado, o esperar unos minutos para recibir el email.
             </p>
+            <?php endif;?>
         </div>
         <?php elseif(isset($warning)):?>
         <div class="col-xs-10 col-xs-offset-1 alert alert-warning" role="alert">

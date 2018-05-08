@@ -690,7 +690,6 @@ function buildPreferenceData($data){
 function sendFacebookRegisterEmail($data) {
     $link       = home_url('/');
     $subject    = '¡Gracias por registrarse a Mesa Profesional!';
-    $headers    = "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
 //    $headers = "Reply-To: marcelo.suvia@gmail.com \r\n";
 //    //$headers .= "CC: test@gmail.com\r\n";
@@ -699,12 +698,31 @@ function sendFacebookRegisterEmail($data) {
 
     $body  = 'Hola '.$data['firstName'].' '.$data['lastName']. '!<br><br>';
     $body .= 'Gracias por registrarte a Mesa Profesional.<br><br>';
-    $body .= 'Usted ya se encuentra habilitado para realizar consultas a través de nuestra página web <a href="'.$link.'">Mesa Profesional</a>.<br><br>';
+    $body .= 'Usted ya se encuentra habilitado para realizar consultas a través de nuestra página web y obtener la mejor respuesta a su consulta.<br><br>';
     $body .= 'Si el link no funciona, copia este código en la barra del navegador:<br>';
     $body .= $link.'<br><br>';
+    $body .= 'Lo saluda atentamente<br>';
+    $body .= 'El equipo de <a href="'.home_url('/').'">Mesa Profesional</a>';
     $body = htmlspecialchars_decode($body);
 
-    wp_mail($data['to'], $subject, $body, "");
+    return wp_mail($data['to'], $subject, $body);
+}
+
+
+function sendRegisterEmail($data){
+    $link = home_url('/accounts?token='.$data['accountToken']);
+    $subject = '¡Gracias por registrarse a Mesa Profesional!';
+
+    $body  = 'Hola '.$data['firstName'].' '.$data['lastName']. '!<br><br>';
+    $body .= 'Gracias por registrarte a Mesa Profesional.<br><br>';
+    $body .= 'Antes de empezar a realizar consultas en nuestro sitio es necesario que actives tu cuenta haciendo click <a href="'.$link.'">aquí</a>.<br><br>';
+    $body .= 'Si el link no funciona, copia este código en la barra del navegador:<br>';
+    $body .= $link.'<br><br>';
+    $body .= 'Lo saluda atentamente<br>';
+    $body .= 'El equipo de <a href="'.home_url('/').'">Mesa Profesional</a>';
+    $body = htmlspecialchars_decode($body);
+
+    return wp_mail($data['to'], $subject, $body);
 }
 
 
