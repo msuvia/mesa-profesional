@@ -72,10 +72,7 @@ if(!empty($_POST)){
                     $mp = inicializeMercadoPago();
                     $subscription = $wpdb->get_row('SELECT * FROM products WHERE type = "subscription"');
 
-                    $aliasForPayment = ($user->email == 'msuvia@garbarinoviajes.com.ar')  ? 'test_user_25772596@testuser.com' : $user->email;
-
-                    //$user->email = ($user->email == 'marcelo.suvia@gmail.com')      ? 'test_user_25772596@testuser.com' : $user->email;
-                    //$user->email = ($user->email == 'gestioncontable1@outlook.com') ? 'test_user_25772596@testuser.com' : $user->email;
+                    $aliasForPayment = ($user->email == 'marcelo.suvia@gmail.com')  ? 'test_user_25772596@testuser.com' : $user->email;
 
                     $preference_data = buildPreferenceData([
                         'itemId'            => $subscription->id,
