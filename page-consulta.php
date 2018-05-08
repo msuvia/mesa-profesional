@@ -337,41 +337,6 @@ if(have_posts()):
                                                                 'urlFailure'        => home_url('/mercadopago/callback'),
                                                                 'userId'            => $userDataArray[0]
                                                             ]);
-                                                            /*$preference_data = [
-                                                                "items" => [
-                                                                    [   
-                                                                        "id"            => $pack->id,
-                                                                        "title"         => $pack->title,
-                                                                        "description"   => $pack->description,
-                                                                        "picture_url"   => $pack->picture_url,
-                                                                        "quantity"      => 1,
-                                                                        "currency_id"   => "ARS", // Available currencies at: https://api.mercadopago.com/currencies
-                                                                        "unit_price"    => floatval($pack->price)
-                                                                    ]
-                                                                ],
-                                                                "payer" => [
-                                                                    "name"  => $userDataArray[1],
-                                                                    "surname" => $userDataArray[2],
-                                                                    "email" => $userDataArray[3]
-                                                                ],
-                                                                "back_urls" => [
-                                                                    "success" => home_url('/mercadopago/callback'),
-                                                                    "pending" => home_url('/'),
-                                                                    "failure" => home_url('/mercadopago/callback')
-                                                                ],
-                                                                "auto_return" => "all",
-                                                                "payment_methods" => [
-                                                                    "excluded_payment_methods" => [],
-                                                                    "excluded_payment_types" => [],
-                                                                    "installments" => 12,
-                                                                    "default_payment_method_id" => null,
-                                                                    "default_installments" => null
-                                                                ],
-                                                                "notification_url" => home_url('/mercadopago/notifications'),
-                                                                "external_reference" => $userDataArray[0],
-                                                                //"client_id" => $userDataArray[0],
-                                                                //"marketplace_fee" => round(floatval($pack->price) * 0.0526315789473684,2)
-                                                            ];*/
                                                             $preference = $mp->create_preference($preference_data);
                                                         ;?>
                                                         <?php if($preference['status'] == -1):?>
