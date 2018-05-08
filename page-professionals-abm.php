@@ -64,21 +64,15 @@ if(!empty($_POST)){
             // emails
             foreach($profList as $prof){
                 $emailTo = $prof['email'];
-                if (!isset($emailTo) || ($emailTo == '') ){
-                    $emailTo = get_option('admin_email');
-                }
 
                 $user = $wpdb->get_row('SELECT * FROM users WHERE email = "'.$emailTo.'"');
-
-
                 if($user->actived_account == '1'){
 
                     // Mercado Pago preference data
                     $mp = inicializeMercadoPago();
                     $subscription = $wpdb->get_row('SELECT * FROM products WHERE type = "subscription"');
 
-                    $userMailAux = $user->email;    // ACORDATE DE BORRAR ABAJO $userMailAux!!!
-                    $user->email = ($user->email == 'msuvia@garbarinoviajes.com.ar')  ? 'test_user_25772596@testuser.com' : $user->email;
+                    $aliasForPayment = ($user->email == 'msuvia@garbarinoviajes.com.ar')  ? 'test_user_25772596@testuser.com' : $user->email;
 
                     //$user->email = ($user->email == 'marcelo.suvia@gmail.com')      ? 'test_user_25772596@testuser.com' : $user->email;
                     //$user->email = ($user->email == 'gestioncontable1@outlook.com') ? 'test_user_25772596@testuser.com' : $user->email;
@@ -91,46 +85,12 @@ if(!empty($_POST)){
                         'itemPrice'         => $subscription->price,
                         'payerFirstName'    => $user->first_name,
                         'payerLastName'     => $user->last_name,
-                        'payerEmail'        => $user->email,
+                        'payerEmail'        => $aliasForPayment,
                         'urlSuccess'        => home_url('/mercadopago/callback'),
                         'urlPending'        => home_url('/mercadopago/callback'),
                         'urlFailure'        => home_url('/mercadopago/callback'),
                         'userId'            => $user->id
                     ]);
-
-                    /*$preference_data = [
-                        "items" => [
-                            [
-                                "id"            => $subscription->id,
-                                "title"         => $subscription->title,
-                                "description"   => $subscription->description,
-                                "picture_url"   => $subscription->picture_url,
-                                "quantity"      => 1,
-                                "currency_id"   => "ARS", // Available currencies at: https://api.mercadopago.com/currencies
-                                "unit_price"    => floatval($subscription->price)
-                            ]
-                        ],
-                        "payer" => [
-                            "name"  => $user->first_name,//$userDataArray[1],
-                            "surname" => $user->last_name,//$userDataArray[2],
-                            "email" => $userEmail,//$user->email//$userDataArray[3]
-                        ],
-                        "back_urls" => [
-                            "success" => home_url('/mercadopago/callback'),
-                            "pending" => home_url('/mercadopago/callback'),
-                            "failure" => home_url('/mercadopago/callback')
-                        ],
-                        "auto_return" => "all",
-                        "payment_methods" => [
-                            "excluded_payment_methods" => [],
-                            "excluded_payment_types" => [],
-                            "installments" => 12,
-                            "default_payment_method_id" => null,
-                            "default_installments" => null
-                        ],
-                        "notification_url" => home_url('/mercadopago/notifications'),
-                        "external_reference" => $user->id  
-                    ];*/
                     $preference = $mp->create_preference($preference_data);
 
                     // payment log
@@ -141,37 +101,31 @@ if(!empty($_POST)){
                         'response'      => json_encode($preference)
                     ]);
 
-                    $link = $preference['response']['init_point'];
+                    // send email
+                    $sendedEmail = sendProfessionalSuccessfulAuthorizationEmail([
+                        'to'            => $user->email,
+                        'firstName'     => $user->first_name,
+                        'lastName'      => $user->last_name,
+                        'linkForPayment'=> $preference['response']['init_point']
+                    ]);
 
-                    $subject = '¡Su inscripción ha sido aprobada en Mesa Profesional!';
-                
-                    $body  = 'Hola '.$user->first_name.' '.$user->last_name. '!<br><br>';
-                    $body .= 'Le damos la bienvenida a Mesa Profesional.<br><br>';
-                    $body .= 'Usted ha sido autorizado por nuestros administradores para empezar a contestar preguntas en Mesa Profesional. Recuerde que una persona es un potencial cliente suyo a corto plazo, por lo que las respuestas que usted brinde pueden ser muy importante en la consideración del cliente.<br><br>';
-                    $body .= 'Antes de empezar a contestar preguntas, es necesario que usted abone una suscripción a nuestro sitio, que le permitirá empezar a responder las consultas de nuestros clientes. Para abonar la suscripción haga click <a href="'.$link.'">aquí</a>.<br><br>';
-                    $body .= 'Si el link no funciona, por favor copie este código en la barra del navegador:<br>';
-                    $body .= $link.'<br><br>';
-                    $body .= 'Lo saluda atentamente<br>';
-                    $body .= 'El equipo de <a href="'.home_url('/').'">Mesa Profesional</a>';
-                    
-                    $body = htmlspecialchars_decode($body);
+                    if($sendedEmail){
+                        $wpdb->update('users', ['mail_sent'=>2], ['email'=>$user->email]);
+                    }
                 }
                 elseif($user->actived_account == '2'){
-                    $subject = 'Su inscripción ha sido denegada en Mesa Profesional';
-                
-                    $body  = 'Hola '.$user->first_name.' '.$user->last_name. '!<br><br>';
-                    $body .= 'Antes que nada, muchas gracias por registrarte a Mesa Profesional.<br><br>';
-                    $body .= 'Lamentablemente le informamos que su inscripción ha sido denegada por nuestros administradores por motivos desconocidos. Lamentamos este inconveniente.<br><br>';
-                    $body .= 'Lo saluda atentamente<br>';
-                    $body .= 'El equipo de <a href="'.home_url('/').'">Mesa Profesional</a>';
-                    
-                    $body = htmlspecialchars_decode($body);
-                }       
 
-                wp_mail($emailTo, $subject, $body, $headers);
-                $wpdb->update('users', ['mail_sent'=>2], ['email'=>$userMailAux]);
+                    $sendedEmail = sendProfessionalDeniedAuthorizationEmail([
+                        'to'            => $user->email,
+                        'firstName'     => $user->first_name,
+                        'lastName'      => $user->last_name
+                    ]);
+
+                    if($sendedEmail){
+                        $wpdb->update('users', ['mail_sent'=>3], ['email'=>$user->email]);
+                    }
+                }
             }
-
 
             echo json_encode(['status'=>'OK']);die;
         }

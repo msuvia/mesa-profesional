@@ -726,6 +726,51 @@ function sendClientRegisterEmail($data){
 }
 
 
+function sendProfessionalRegisterEmail($data){
+    $subject = '¡Gracias por registrarse a Mesa Profesional!';
+
+    $body  = 'Hola '.$data['firstName'].' '.$data['lastName']. '!<br><br>';
+    $body .= 'Muchas gracias por registrarse a Mesa Profesional.<br><br>';
+    $body .= 'Recibimos su solicitud, en este momento se encuentra pendiente de moderación por parte de nuestros administradores y le enviaremos un email cuando los mismos aprueben su solicitud.<br><br>';
+    $body .= 'Una vez aprobada, usted podrá abonar a través de MercadoPago la suscripción para comenzar a utilizar las funcionalidades de Mesa Profesional.<br><br>';
+    $body .= 'Lo saluda atentamente<br>';
+    $body .= 'El equipo de <a href="'.home_url('/').'">Mesa Profesional</a>';
+    $body = htmlspecialchars_decode($body);
+
+    return wp_mail($data['to'], $subject, $body);
+}
+
+
+function sendProfessionalSuccessfulAuthorizationEmail($data){
+    $subject = '¡Su inscripción ha sido aprobada en Mesa Profesional!';
+
+    $body  = 'Hola '.$data['firstName'].' '.$data['lastName']. '!<br><br>';
+    $body .= 'Le damos la bienvenida a Mesa Profesional.<br><br>';
+    $body .= 'Usted ha sido autorizado por nuestros administradores para empezar a contestar preguntas en Mesa Profesional. Recuerde que una persona es un potencial cliente suyo a corto plazo, por lo que las respuestas que usted brinde pueden ser muy importante en la consideración del cliente.<br><br>';
+    $body .= 'Antes de empezar a contestar preguntas, es necesario que usted abone una suscripción a nuestro sitio, que le permitirá empezar a responder las consultas de nuestros clientes. Para abonar la suscripción haga click <a href="'.$data['linkForPayment'].'">aquí</a>.<br><br>';
+    $body .= 'Si el link no funciona, por favor copie este código en la barra del navegador:<br>';
+    $body .= $data['linkForPayment'].'<br><br>';
+    $body .= 'Lo saluda atentamente<br>';
+    $body .= 'El equipo de <a href="'.home_url('/').'">Mesa Profesional</a>';
+    $body = htmlspecialchars_decode($body);
+
+    return wp_mail($data['to'], $subject, $body);
+}
+
+
+function sendProfessionalDeniedAuthorizationEmail($data){
+    $subject = 'Su inscripción ha sido denegada en Mesa Profesional';
+
+    $body  = 'Hola '.$data['firstName'].' '.$data['lastName']. '!<br><br>';
+    $body .= 'Antes que nada, muchas gracias por registrarte a Mesa Profesional.<br><br>';
+    $body .= 'Lamentablemente le informamos que su inscripción ha sido denegada por nuestros administradores por motivos desconocidos. Lamentamos este inconveniente.<br><br>';
+    $body .= 'Para saber el detalle de los motivos de su rechazo, por favor, contáctese con nuestros administradores.<br><br>';
+    $body .= 'Lo saluda atentamente<br>';
+    $body .= 'El equipo de <a href="'.home_url('/').'">Mesa Profesional</a>';
+    $body = htmlspecialchars_decode($body);
+
+    return wp_mail($data['to'], $subject, $body);
+}
 
 
 

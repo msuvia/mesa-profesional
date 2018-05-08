@@ -36,8 +36,8 @@
 
                     if($success){
                         $data['to'] = $data['email'];
-                        $emailSended = sendClientRegisterEmail($data);
-                        if($emailSended){
+                        $sendedEmail = sendClientRegisterEmail($data);
+                        if($sendedEmail){
                             $wpdb->update($usersTable, ['mail_sent'=>1], ['email'=>$data['email']]);
                         }
                     } else {
@@ -95,7 +95,7 @@ if(have_posts()):
         <?php if(!empty($success)):?>
         <div class="col-xs-10 col-xs-offset-1 alert alert-success" role="alert">
             <b>Sus datos se han guardado satisfactoriamente</b>
-            <?php if(!empty($emailSended)):?>
+            <?php if(!empty($sendedEmail)):?>
             <p>
                 Hemos enviado un email a su casilla de correo para que pueda activar su cuenta, por favor, revíselo y siga las instrucciones.<br>
                 <b>Importante:</b> Recuerde verificar su casilla de correo no deseado, o esperar unos minutos para recibir el email.

@@ -34,23 +34,13 @@
                     ]);
 
                     if($success){
-                        $emailTo = $data['email'];
-                        if (!isset($emailTo) || ($emailTo == '') ){
-                            $emailTo = get_option('admin_email');
+                        $data['to'] = $data['email'];
+                        $sendedEmail = sendProfessionalRegisterEmail($data);
+                        if($sendedEmail){
+                            $wpdb->update($usersTable, ['mail_sent'=>1], ['email'=>$data['email']]);    
                         }
-
-                        $subject = '¡Gracias por registrarse a Mesa Profesional!';
-                        
-                        $body  = 'Hola '.$data['firstName'].' '.$data['lastName']. '!<br><br>';
-                        $body .= 'Muchas gracias por registrarse a Mesa Profesional.<br><br>';
-                        $body .= 'Recibimos su solicitud, en este momento se encuentra pendiente de moderación por parte de nuestros administradores y le enviaremos un email cuando los mismos aprueben su solicitud.<br><br>';
-                        $body .= 'Una vez aprobada, usted podrá abonar a través de MercadoPago la suscripción para comenzar a utilizar las funcionalidades de Mesa Profesional.<br><br>';
-                        $body .= 'Saludos atentamente,<br>';
-                        $body .= 'El equipo de <a href="'.home_url('/').'">Mesa Profesional</a>';
-                        $body = htmlspecialchars_decode($body);
-
-                        wp_mail($emailTo, $subject, $body, $headers);
-                        $wpdb->update($usersTable, ['mail_sent'=>1], ['email'=>$data['email']]);
+                    } else {
+                        $warning = 'Hubo un problema en el guardado de sus datos, por favor, intente nuevamente y si persiste, contáctese con los administradores.';
                     }
                 }
                 else {
@@ -90,13 +80,15 @@ if(have_posts()):
         
         <article class="page professionals-sign">
             <div class="col-xs-12">
-                <?php if(isset($success) && true==$success):?>
+                <?php if(!empty($success)):?>
                 <div class="col-xs-12 alert alert-success" role="alert">
                     <b>Sus datos se han guardado satisfactoriamente</b>
+                    <?php if(!empty($sendedEmail)):?>
                     <p>
-                        Le hemos enviado un email a su correo para que pueda seguir los próximos pasos, por favor, revise su correo y siga las instrucciones<br>
-                        <b>Importante:</b> Recuerde verificar su casilla de correo no deseado.
+                        Le hemos enviado un email a su correo para que pueda seguir los próximos pasos, por favor, revise su correo y siga las instrucciones.<br>
+                        <b>Importante:</b> Recuerde verificar su casilla de correo no deseado, o esperar unos minutos para recibir el email.
                     </p>
+                    <?php endif;?>
                 </div>
                 <?php elseif(isset($warning)):?>
                 <div class="col-xs-12 alert alert-warning" role="alert">
@@ -104,8 +96,8 @@ if(have_posts()):
                 </div>
                 <?php endif;?>
 
-                <div class="col-xs-12 form-wrap box">
-                    <div class="col-xs-10 col-xs-offset-1 register-form">
+                <div class="col-xs-10 col-xs-offset-1 form-wrap box">
+                    <div class="col-xs-12 register-form">
                         <h4 class="col-xs-12">Profesionales: Registro</h4>
                         <?php set_query_var('type', encryptIt('professional'));?>
                         <?php get_template_part('register-form');?>
