@@ -289,7 +289,7 @@ function isLoggedIn(){
 
 
 
-function isAdmin($userData = null){
+function isRol($rol, $userData = null){
     if(!$userData){
         return false;
     }
@@ -301,7 +301,8 @@ function isAdmin($userData = null){
         return false;
     }
 
-    return ($user->rol == 1);
+    $dbRol = $wpdb->get_row('SELECT * FROM roles WHERE id="'.$user->rol.'"');
+    return ($dbRol->name == $rol);
 }
 
 

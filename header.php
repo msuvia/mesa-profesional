@@ -78,6 +78,9 @@
                     </div>
                     <div class="dropdown-content" aria-labelledby="user-data-menu">
                         <?php $key = encryptIt('userid-'.$userDataArray[0]);?>
+                        <?php if(isRol('professional',$userData)):?>
+                        <a class="col-xs-12 dropdown-item" href="#">Subir una foto</a>
+                        <?php endif;?>
                         <a class="col-xs-12 dropdown-item" href="<?php echo home_url('/questions?key='.$key);?>">Mis consultas</a>
                         <a class="col-xs-12 dropdown-item" href="<?php echo home_url('/logout');?>">Cerrar sesión</a>
                     </div>
@@ -106,7 +109,7 @@
                     <i class="fas fa-trademark"></i>
                     <span>Mesa Profesional</span>
                 </div>
-                <?php if($userData && isAdmin($userData)):?>
+                <?php if($userData && isRol('admin',$userData)):?>
                   <?php wp_nav_menu(['theme_location' => 'admin']);?>
                 <?php else:?>
                   <?php wp_nav_menu(['theme_location' => 'primary']);?>
