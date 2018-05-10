@@ -75,11 +75,41 @@
                             <?php echo $userDataArray[1].' '.$userDataArray[2];?>
                         </span>
                         <i class="fas fa-angle-down pull-right"></i>
+                        <?php if(isRol('professional',$userData)):?>
+                            <button class="btn btn-primary btn-lg hidden" id="modal" data-toggle="modal" data-target="#uploadModal"></button>
+                            <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+                                <div class="vertical-alignment-helper">
+                                    <div class="modal-dialog vertical-align-center upload-modal">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="col-xs-6 no-padding profile-image">
+
+                                                </div>
+                                                <div class="col-xs-5 no-padding profile-image-form">
+                                                    <form method="post" enctype="multipart/form-data">
+                                                        <label for="profile-image">Seleccione una imagen para subir</label>
+                                                        <small class="col-xs-12 no-padding"><span class="asterisk">*</span><i> Sólo se permiten formatos .jpg, .jpeg y .png</i></small>
+                                                        <input type="file" class="pull-left" id="profile-image" name="profile-image" accept=".jpg, .jpeg, .png" value="Buscar imagen">
+                                                        <button class="col-xs-12 btn btn-success ld-ext-right hovering submit">
+                                                            Aceptar
+                                                            <span class="ld ld-ring ld-spin"></span>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif;?>
                     </div>
                     <div class="dropdown-content" aria-labelledby="user-data-menu">
                         <?php $key = encryptIt('userid-'.$userDataArray[0]);?>
                         <?php if(isRol('professional',$userData)):?>
-                        <a class="col-xs-12 dropdown-item" href="#">Subir una foto</a>
+                        <a class="col-xs-12 dropdown-item dropdown-picture-item">Subir una foto de perfil</a>
                         <?php endif;?>
                         <a class="col-xs-12 dropdown-item" href="<?php echo home_url('/questions?key='.$key);?>">Mis consultas</a>
                         <a class="col-xs-12 dropdown-item" href="<?php echo home_url('/logout');?>">Cerrar sesión</a>

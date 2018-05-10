@@ -91,4 +91,13 @@ $(document).ready(function(){
 	}
 
 
+    // upload profile image
+    if($('.dropdown-picture-item').length > 0){
+        $('.dropdown-picture-item').on('click',function(ev){
+            ev.preventDefault();ev.stopPropagation();
+            $('button#modal').trigger('click');
+        });
+    }
+
+
 });

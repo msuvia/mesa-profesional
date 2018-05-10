@@ -310,6 +310,7 @@ footer .container .signature{
 
 .site-header .user-data .dropdown .dropdown-content{
     right: -10px;
+    font-size: 13px;
 }
 
 .site-header .user-data .dropdown .dropdown-content:before{
@@ -617,7 +618,7 @@ form input[type="submit"]:hover{
 }
 
 form .asterisk{
-    color: red;
+    color: #FF0000;
 }
 
 form label[for="terms"]{
@@ -698,6 +699,7 @@ form .char-count{
 .modal-dialog .modal-content .modal-body{
     display: inline-block;
     padding: 0;
+    width: 100%;
 }
 
 .modal-dialog .modal-content .modal-body h4{
@@ -806,7 +808,7 @@ form .char-count{
 }
 
 
-/* Professionals REgister Modal Styles */
+/* Professionals Register Modal Styles */
 .modal-dialog.professionals-register-modal{
     font-size: 13px;
 }
@@ -838,6 +840,26 @@ form .char-count{
 .modal-dialog.professionals-register-modal .modal-content .modal-footer{
     padding: 0;
     border-top: none;
+}
+
+
+/* Upload Profile Image Modal Styles */
+.modal-dialog.upload-modal{
+    color: #333333;
+}
+
+.modal-dialog.upload-modal small{
+    line-height: 15px;
+}
+
+.modal-dialog.upload-modal input{
+    font-size: 11px;
+    margin-top: 20px;
+    line-height: 0;
+}
+
+.modal-dialog.upload-modal button{
+    margin: 20px 0 0;
 }
 
 

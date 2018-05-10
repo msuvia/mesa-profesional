@@ -53,7 +53,9 @@ $(document).ready(function(){
 
     // ********** modals ********** //
     if($('.modal').length > 0){
-        $('button#modal').trigger('click');
+        if($('#payQuestionsModal').length > 0 || $('#loginModal').length > 0){
+            $('button#modal').trigger('click');
+        }
 
         $('.modal .close').on('click',function(ev){
             ev.preventDefault();ev.stopPropagation();
