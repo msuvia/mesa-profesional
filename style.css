@@ -845,7 +845,13 @@ form .char-count{
 
 /* Upload Profile Image Modal Styles */
 .modal-dialog.upload-modal{
+    width: 550px;
     color: #333333;
+}
+
+.site-header .user-data .modal-dialog.upload-modal svg.fa-user{
+    font-size: 7em;
+    margin: 25px 50px;
 }
 
 .modal-dialog.upload-modal small{

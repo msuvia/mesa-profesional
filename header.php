@@ -85,14 +85,22 @@
                                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
                                             </div>
                                             <div class="modal-body">
-                                                <div class="col-xs-6 no-padding profile-image">
-
+                                                <div class="col-xs-5 no-padding profile-image">
+                                                    <?php global $wpdb;?>
+                                                    <?php $user = $wpdb->get_row('SELECT * FROM users WHERE id = "'.$userDataArray[0].'"');?>
+                                                    <?php if($user->picture_url):?>
+                                                        <img src="<?php echo $user->picture_url;?>"/>
+                                                    <?php else:?>
+                                                        <img src="" class="hidden"/>
+                                                        <i class="far fa-user"></i>
+                                                    <?php endif;?>
                                                 </div>
-                                                <div class="col-xs-5 no-padding profile-image-form">
-                                                    <form method="post" enctype="multipart/form-data">
-                                                        <label for="profile-image">Seleccione una imagen para subir</label>
+                                                <div class="col-xs-6 no-padding profile-image-form">
+                                                    <form method="post" enctype="multipart/form-data" id="upload-profile-image-form">
+                                                        <label for="profile-image-input">Seleccione una imagen para subir</label>
                                                         <small class="col-xs-12 no-padding"><span class="asterisk">*</span><i> Sólo se permiten formatos .jpg, .jpeg y .png</i></small>
-                                                        <input type="file" class="pull-left" id="profile-image" name="profile-image" accept=".jpg, .jpeg, .png" value="Buscar imagen">
+                                                        <input type="file" class="pull-left" id="profile-image-input" name="profile-image-input" accept=".jpg, .jpeg, .png" value="Buscar imagen">
+                                                        <small class="col-xs-12 no-padding error"></small>
                                                         <button class="col-xs-12 btn btn-success ld-ext-right hovering submit">
                                                             Aceptar
                                                             <span class="ld ld-ring ld-spin"></span>

@@ -99,5 +99,47 @@ $(document).ready(function(){
         });
     }
 
+    if($('#upload-profile-image-form').length > 0){
+        $('#uploadProfileImageForm button.submit').on('click',function(ev){
+            ev.preventDefault(); ev.stopPropagation();
+            $(this).addClass('running');
+            $.ajax({
+                url: '/uploads',
+                type: 'POST',
+                data: new FormData($('#uploadProfileImageForm')),
+                dataType: 'json',
+                processData: false,
+                success: function(data){
+                    
+                }
+            });
+        });
+    }
+
+    $("#profile-image-input").change(function() {
+        $(this).siblings('error').empty();
+        var file = this.files[0];
+        var imagefile = file.type;
+        var match= ["image/jpeg","image/png","image/jpg"];
+        if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2])))
+        {
+            $(this).siblings('error').html("<p id='error'>Por favor, seleccione una imagen válida</p>"+"<h4>Nota</h4>"+"<span id='error_message'>Sólo los tipos de imagen jpeg, jpg y png están permitidos</span>");
+            return false;
+        }
+        else
+        {
+            var reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
+    function imageIsLoaded(e) {
+        $("#profile-image-input").css("color","green");
+        $('#profile-image img').attr('src', e.target.result);
+        $('#profile-image img').attr('width', '250px');
+        $('#profile-image img').attr('height', '230px');
+    }
+
 
 });
