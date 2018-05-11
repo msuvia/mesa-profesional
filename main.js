@@ -106,21 +106,22 @@ $(document).ready(function(){
         // **** all modals - end
 
         function checkModal(){
-            $('.modal').removeClass('in').hide();
-            $('.modal-backdrop').remove();
-            $('body').removeClass('modal-open');
-
-
 
             // login modal
             if($('.modal').find('.login-modal').length > 0){
+                $('.modal').removeClass('in').hide();
+                $('.modal-backdrop').remove();
+                $('body').removeClass('modal-open');
                 window.location.href='https://mesaprofesional.com';
             }
 
 
-
             // packs modal
             if($('.modal').find('.packs-modal').length > 0){
+                $('.modal').removeClass('in').hide();
+                $('.modal-backdrop').remove();
+                $('body').removeClass('modal-open');
+
                 // check MP
                 if($('.modal').find('.mercado-pago-result').length > 0){
                     if($('.modal').find('.mercado-pago-result').val() == 'approved'){
@@ -141,13 +142,13 @@ $(document).ready(function(){
             if($('.modal').find('.upload-modal').length > 0){
                 $(this).addClass('running');
                 $.ajax({
-                    url: '/upload',
+                    url: '/uploads',
                     type: 'POST',
                     cache: false,
                     contentType: false,
                     processData: false,
-                    //data: {asd:'asd'},
-                    data: new FormData($('#uploadProfileImageForm')),
+                    data: {asd:'asd'},
+                    //data: new FormData($('#uploadProfileImageForm')),
                     dataType: 'json',
                     success: function(data){
                         console.log(data);
