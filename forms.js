@@ -162,6 +162,11 @@ $(document).ready(function(){
                     }
                 },"json");
             }
+            // upload profile form into modal ?
+            else if(form.parents('.modal#uploadModal')){
+                // actions in main.js -> checkModal function...
+                return true;
+            }
             else{
                 form.find('button.submit').addClass('running');
                 form.submit();

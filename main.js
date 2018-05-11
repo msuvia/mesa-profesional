@@ -146,8 +146,8 @@ $(document).ready(function(){
                     cache: false,
                     contentType: false,
                     processData: false,
-                    data: {asd:'asd'},
-                    //data: new FormData($('#uploadProfileImageForm')),
+                    //data: {asd:'asd'},
+                    data: new FormData($('#uploadProfileImageForm')),
                     dataType: 'json',
                     success: function(data){
                         console.log(data);
