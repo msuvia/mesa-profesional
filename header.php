@@ -76,7 +76,7 @@
                         </span>
                         <i class="fas fa-angle-down pull-right"></i>
                         <?php if(isRol('professional',$userData)):?>
-                            <button class="btn btn-primary btn-lg hidden" id="modal" data-toggle="modal" data-target="#uploadModal"></button>
+                            <button class="btn btn-primary btn-lg hidden" id="uploadModalBtn" data-toggle="modal" data-target="#uploadModal"></button>
                             <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
                                 <div class="vertical-alignment-helper">
                                     <div class="modal-dialog vertical-align-center upload-modal">
