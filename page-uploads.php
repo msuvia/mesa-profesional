@@ -35,7 +35,7 @@ if(!empty($_FILES)){
         $fileFrom       = filter_var($userFile["tmp_name"], FILTER_SANITIZE_STRING);
         $fileName       = filter_var($userFile["name"], FILTER_SANITIZE_STRING);
         $fileLimitSize  = 100000;                    //Approx. 100kb
-        $fileTo         = 'uploads/profile-images/';
+        $fileTo         = 'wp-content/uploads/profile-images/';
 
 
         list($fileName, $fileExtension) = explode(".", $userFile["name"]);

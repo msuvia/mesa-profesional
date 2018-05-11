@@ -63,7 +63,6 @@ $(document).ready(function(){
             $("#profile-image-input").change(function() {
                 $(this).siblings('error').empty();
                 var file = this.files[0];
-                console.log(file);
                 var imagefile = file.type;
                 var match= ["image/jpeg","image/png","image/jpg"];
                 if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2])))
@@ -73,6 +72,9 @@ $(document).ready(function(){
                 }
                 else
                 {
+                    $('#profile-image .ld-spin').removeClass('hidden');
+                    $('#profile-image .fa-user').addClass('disabled');
+                    $('#profile-image img').addClass('disabled');
                     var reader = new FileReader();
                     reader.onload = imageIsLoaded;
                     reader.readAsDataURL(this.files[0]);
@@ -80,10 +82,15 @@ $(document).ready(function(){
             });
 
             function imageIsLoaded(e) {
-                $("#profile-image-input").css("color","green");
-                $('#profile-image img').attr('src', e.target.result);
-                $('#profile-image img').attr('width', '250px');
-                $('#profile-image img').attr('height', '230px');
+                setTimeout(function(){
+                    $("#profile-image-input").css("color","green");
+                    $('#profile-image img').attr('src', e.target.result);
+                    $('#profile-image img').attr('width', '250px');
+                    $('#profile-image img').attr('height', '230px');
+                    $('#profile-image img').removeClass('disabled').removeClass('hidden').fadeIn(1000);
+                    $('#profile-image .ld-spin').addClass('hidden');
+                    $('#profile-image .fa-user').remove();
+                }, 2000);
             }
         }
 
@@ -141,7 +148,7 @@ $(document).ready(function(){
 
             // upload profile image modal
             if($('.modal').find('.upload-modal').length > 0){
-                $(this).addClass('running');
+                $('#uploadModal button.submit').addClass('running');
                 var formData = new FormData();
 
                 //Append files infos
@@ -158,11 +165,28 @@ $(document).ready(function(){
                     data: formData,
                     dataType: 'json',
                     success: function(data){
-                        console.log(data);
+                        $('#uploadModal button.submit').removeClass('running');
+                        if(data.status=='OK'){
+                            $('#uploadModal').find('status').html('<span>Foto de perfil guardada satisfactoriamente.</span><a href="" class="close-link">Salir</a>');
+                            $('#uploadModal').find('status').addClass('text-success');
+                            $('#uploadModal .close-link').on('click',function(){
+                                $('.modal').removeClass('in').hide();
+                                $('.modal-backdrop').remove();
+                                $('body').removeClass('modal-open');
+                            });
+                        }
+                        else{
+                            var messageError = (typeof data.message !== typeof undefined) ? data.message : 'Se ha producido un error desconocido, por favor contáctese con nuestros administradores.';
+                            $('#uploadModal').find('status').addClass('text-error');
+                            $('#uploadModal').find('status').html(messageError);
+                        }
+
                     },
                     error: function(data){
-                        console.log("error");
-                        console.log(data);
+                        var messageError = (typeof data.message !== typeof undefined) ? data.message : 'Se ha producido un error desconocido, por favor contáctese con nuestros administradores.';
+                        $('#uploadModal button.submit').removeClass('running');
+                        $('#uploadModal').find('status').addClass('text-error');
+                        $('#uploadModal').find('status').html(messageError);
                     }
                 });
             }

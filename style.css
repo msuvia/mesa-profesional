@@ -54,6 +54,10 @@ header::before{
     color: #09b30b;
 }
 
+.text-error{
+    color: red;
+}
+
 .alert{
     margin-bottom: 20px;
 }
@@ -851,7 +855,20 @@ form .char-count{
 
 .site-header .user-data .modal-dialog.upload-modal svg.fa-user{
     font-size: 7em;
-    margin: 25px 50px;
+    margin: 25px auto;
+    width: 100%;
+}
+
+.site-header .user-data .modal-dialog.upload-modal svg.fa-user.disabled
+.site-header .user-data .modal-dialog.upload-modal img.disabled{
+    opacity: 0.1;
+    filter: alpha(opacity=10); /* For IE8 and earlier */
+}
+
+.modal-dialog.upload-modal #profile-image .ld-spin{
+    position: absolute;
+    top: 40%;
+    left: 47%;
 }
 
 .modal-dialog.upload-modal small{
@@ -867,6 +884,7 @@ form .char-count{
 .modal-dialog.upload-modal button{
     margin: 20px 0 0;
 }
+
 
 
 /* Questions Home Styles*/
