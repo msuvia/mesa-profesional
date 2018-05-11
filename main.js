@@ -63,6 +63,7 @@ $(document).ready(function(){
             $("#profile-image-input").change(function() {
                 $(this).siblings('error').empty();
                 var file = this.files[0];
+                console.log(file);
                 var imagefile = file.type;
                 var match= ["image/jpeg","image/png","image/jpg"];
                 if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2])))
@@ -141,14 +142,20 @@ $(document).ready(function(){
             // upload profile image modal
             if($('.modal').find('.upload-modal').length > 0){
                 $(this).addClass('running');
+                var formData = new FormData();
+
+                //Append files infos
+                jQuery.each($("#profile-image-input")[0].files, function(i, file) {
+                    formData.append('userfile-'+i, file);
+                });
+
                 $.ajax({
                     url: '/uploads',
                     type: 'POST',
                     cache: false,
                     contentType: false,
                     processData: false,
-                    data: {asd:'asd'},
-                    //data: new FormData($('#uploadProfileImageForm')),
+                    data: formData,
                     dataType: 'json',
                     success: function(data){
                         console.log(data);

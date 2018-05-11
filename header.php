@@ -85,13 +85,13 @@
                                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
                                             </div>
                                             <div class="modal-body">
-                                                <div class="col-xs-5 no-padding profile-image">
+                                                <div class="col-xs-5 no-padding" id="profile-image">
                                                     <?php global $wpdb;?>
                                                     <?php $user = $wpdb->get_row('SELECT * FROM users WHERE id = "'.$userDataArray[0].'"');?>
                                                     <?php if($user->picture_url):?>
-                                                        <img src="<?php echo $user->picture_url;?>"/>
+                                                        <img src="<?php echo $user->picture_url;?>" id="profile-image-img"/>
                                                     <?php else:?>
-                                                        <img src="" class="hidden"/>
+                                                        <img src="" class="hidden" id="profile-image-img"/>
                                                         <i class="far fa-user"></i>
                                                     <?php endif;?>
                                                 </div>
