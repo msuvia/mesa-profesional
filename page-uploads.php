@@ -6,6 +6,9 @@
  * Time: 1:24 PM
  */
 
+/*
+ *  Template Name: Uploads Template
+ */
 
 // upload profile image
 if(!empty($_POST)){
