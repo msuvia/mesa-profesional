@@ -151,12 +151,17 @@ get_header();
                                             <div class="col-xs-12 answer-inner">
                                                 <i class="fas fa-level-up-alt pull-left"></i>
                                                 <div class="pull-left user-image">
-                                                    <img src="https://mesaprofesional.com/wp-content/uploads/2018/03/perfil-150x150.jpeg"/>
-                                                    <i class="fas fa-comments"></i>
+                                                    <?php if($answer->picture_url):?>
+                                                        <img src="<?php echo home_url($answer->picture_url);?>" width="20"/>
+                                                        <i class="fas fa-comments"></i>
+                                                    <?php else:?>
+                                                        <img src="https://mesaprofesional.com/wp-content/uploads/2018/03/perfil-150x150.jpeg"/>
+                                                        <i class="fas fa-comments"></i>
+                                                    <?php endif;?>
                                                 </div>
                                                 <div class="col-xs-11 answer-content">
                                                     <div class="col-xs-12 no-padding answer-text">
-                                                        <?php echo $answer->text;?>
+                                                        <?php echo str_replace("\n","<br>",$answer->text);?>
                                                     </div>
                                                     <div class="col-xs-12 no-padding answer-user-name">
                                                         <?php $key = encryptIt('profid-'.$answer->user_id);?>
@@ -252,24 +257,28 @@ get_header();
                 <!--<?php dynamic_sidebar('sidebar1');?>-->
                 <?php 
                     global $wpdb;
-                    $professionals = $wpdb->get_results('SELECT avg(rating) as rating, u.first_name, u.last_name FROM answers a LEFT JOIN users u ON a.user_id = u.id WHERE rol IN (1,2) group by email');
+                    $professionals = $wpdb->get_results('SELECT avg(rating) as rating, u.first_name, u.last_name, u.picture_url FROM answers a LEFT JOIN users u ON a.user_id = u.id WHERE rol IN (1,2) group by email');
                 ?>
 
                 <?php foreach($professionals as $professional):?>
                 <?php if(!is_null($professional->rating)):?>
-                <div class="col-xs-12 no-padding professional-info">
-                    <img class="pull-left" src="https://mesaprofesional.com/wp-content/uploads/2018/03/perfil-150x150.jpeg"/>
-                    <div class="prof-name">
-                        <?php echo $professional->first_name.' '.$professional->last_name;?>
-                    </div>
-                    <div class="jrating">
-                        <div class="rating">
-                            <span class="pull-left stars"></span>
-                            <small><?php echo $professional->rating;?></small>
-                            <input type="hidden" class="average" value="<?php echo $professional->rating;?>"/>
+                    <div class="col-xs-12 no-padding professional-info">
+                        <?php if($professional->picture_url):?>
+                            <img class="pull-left" src="<?php echo home_url($professional->picture_url);?>" width="20"/>
+                        <?php else:?>
+                            <img class="pull-left" src="https://mesaprofesional.com/wp-content/uploads/2018/03/perfil-150x150.jpeg"/>
+                        <?php endif;?>
+                        <div class="prof-name">
+                            <?php echo $professional->first_name.' '.$professional->last_name;?>
+                        </div>
+                        <div class="jrating">
+                            <div class="rating">
+                                <span class="pull-left stars"></span>
+                                <small><?php echo $professional->rating;?></small>
+                                <input type="hidden" class="average" value="<?php echo $professional->rating;?>"/>
+                            </div>
                         </div>
                     </div>
-                </div>
                 <?php endif;?>
                 <?php endforeach;?>
                 

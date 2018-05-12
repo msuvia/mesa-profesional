@@ -974,7 +974,6 @@ article.posts .questions .question .question-content .question-date span{
 
 article.posts .questions .question .question-content .question-text{
     color: #333;
-    font-weight: bolder;
     margin-top: 10px;
     line-height: 17px;
 }
@@ -999,7 +998,7 @@ article.posts .questions .question .answer-inner .user-image{
 }
 
 article.posts .questions .question .answer-inner .user-image img{
-    width: 15px;
+    width: 20px;
     margin: 5px 0 0 10px;
 }
 
@@ -1021,6 +1020,7 @@ article.posts .questions .question .answer-inner .answer-content .answer-text{
 article.posts .questions .question .answer-inner .answer-content .answer-user-name{
     font-size: 10px;
     color: #999;
+    margin: 7px 0 0;
 }
 
 article.posts .questions .question .answer-rating{
