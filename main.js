@@ -153,7 +153,7 @@ $(document).ready(function(){
 
             // upload profile image modal
             if($('.modal').find('.upload-modal').length > 0){
-                if(ev.currentTarget.className.indexOf('submit')){
+                if(ev.currentTarget.className.indexOf('submit') > 0){
                     $('#uploadModal button.submit').addClass('running');
                     var formData = new FormData();
 
