@@ -92,18 +92,23 @@ $(document).ready(function(){
                     $('#profile-image .fa-user').remove();
                 }, 2000);
             }
+
+            $('#uploadModal .close-link').on('click',function(ev){
+                ev.preventDefault();ev.stopPropagation();
+                checkModal(ev);
+            })
         }
 
 
         // **** all modals - begin
         $('.modal .close').on('click',function(ev){
             ev.preventDefault();ev.stopPropagation();
-            checkModal();
+            checkModal(ev);
         });
 
         $('.modal .btn-success').on('click',function(ev){
             ev.preventDefault();ev.stopPropagation();
-            checkModal();
+            checkModal(ev);
         });
 
         if($('.modal').find('.loading').length > 0){
@@ -113,7 +118,7 @@ $(document).ready(function(){
         }
         // **** all modals - end
 
-        function checkModal(){
+        function checkModal(ev){
 
             // login modal
             if($('.modal').find('.login-modal').length > 0){
@@ -148,50 +153,55 @@ $(document).ready(function(){
 
             // upload profile image modal
             if($('.modal').find('.upload-modal').length > 0){
-                $('#uploadModal button.submit').addClass('running');
-                var formData = new FormData();
+                if(ev.currentTarget.className.indexOf('submit')){
+                    $('#uploadModal button.submit').addClass('running');
+                    var formData = new FormData();
 
-                //Append files infos
-                jQuery.each($("#profile-image-input")[0].files, function(i, file) {
-                    formData.append('userfile-'+i, file);
-                });
+                    //Append files infos
+                    jQuery.each($("#profile-image-input")[0].files, function(i, file) {
+                        formData.append('userfile-'+i, file);
+                    });
 
-                $.ajax({
-                    url: '/uploads',
-                    type: 'POST',
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    data: formData,
-                    dataType: 'json',
-                    success: function(data){
-                        $('#uploadModal button.submit').removeClass('running');
-                        if(data.status=='OK'){
-                            $('#uploadModal').find('.status').html('<span>Foto de perfil guardada satisfactoriamente.</span><a href="" class="close-link">Salir</a>');
-                            $('#uploadModal').find('.status').addClass('text-success');
-                            $('#uploadModal .close-link').on('click',function(){
-                                $('.modal').removeClass('in').hide();
-                                $('.modal-backdrop').remove();
-                                $('body').removeClass('modal-open');
-                            });
-                        }
-                        else{
+                    $.ajax({
+                        url: '/uploads',
+                        type: 'POST',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        dataType: 'json',
+                        success: function(data){
+                            $('#uploadModal button.submit').removeClass('running');
+                            if(data.status=='OK'){
+                                $('#uploadModal').find('.status').html('<span>Foto de perfil guardada satisfactoriamente.</span>');
+                                $('#uploadModal').find('.status').addClass('text-success');
+                                $('#uploadModal .close-link').on('click',function(){
+                                    $('.modal').removeClass('in').hide();
+                                    $('.modal-backdrop').remove();
+                                    $('body').removeClass('modal-open');
+                                });
+                            }
+                            else{
+                                var messageError = (typeof data.message !== typeof undefined) ? data.message : 'Se ha producido un error desconocido, por favor contáctese con nuestros administradores.';
+                                $('#uploadModal').find('.status').addClass('text-error');
+                                $('#uploadModal').find('.status').html(messageError);
+                            }
+
+                        },
+                        error: function(data){
                             var messageError = (typeof data.message !== typeof undefined) ? data.message : 'Se ha producido un error desconocido, por favor contáctese con nuestros administradores.';
+                            $('#uploadModal button.submit').removeClass('running');
                             $('#uploadModal').find('.status').addClass('text-error');
                             $('#uploadModal').find('.status').html(messageError);
                         }
-
-                    },
-                    error: function(data){
-                        var messageError = (typeof data.message !== typeof undefined) ? data.message : 'Se ha producido un error desconocido, por favor contáctese con nuestros administradores.';
-                        $('#uploadModal button.submit').removeClass('running');
-                        $('#uploadModal').find('.status').addClass('text-error');
-                        $('#uploadModal').find('.status').html(messageError);
-                    }
-                });
+                    });
+                }
+                else {
+                    $('.modal').removeClass('in').hide();
+                    $('.modal-backdrop').remove();
+                    $('body').removeClass('modal-open');
+                }
             }
-
-
         }
     }
     

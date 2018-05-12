@@ -885,6 +885,23 @@ form .char-count{
     margin: 20px 0 0;
 }
 
+.modal-dialog.upload-modal .action-buttons{
+    margin: 20px 0 0;
+}
+
+.modal-dialog.upload-modal .action-buttons button{
+    margin: 0;
+}
+
+.modal-dialog.upload-modal .action-buttons .close-link{
+    line-height: 43px;
+    text-decoration: underline;
+}
+
+.modal-dialog.upload-modal .action-buttons .status{
+    margin: 10px 0 0;
+}
+
 
 
 /* Questions Home Styles*/

@@ -69,9 +69,14 @@
             <div class="col-xs-3 pull-right user-data">
                 <div class="pull-right dropdown">
                     <div class="pull-right dropbtn" id="user-data-menu">
+                        <?php $userDataArray = explode('-', $userData);?>
+                        <?php global $wpdb;$user = $wpdb->get_row('SELECT * FROM users WHERE id = "'.$userDataArray[0].'"');?>
+                        <?php if($user->picture_url):?>
+                        <img src="<?php echo home_url($user->picture_url);?>" width="20"/>
+                        <?php else:?>
                         <i class="fas fa-user pull-left"></i>
+                        <?php endif;?>
                         <span class="user-name">
-                            <?php $userDataArray = explode('-', $userData);?>
                             <?php echo $userDataArray[1].' '.$userDataArray[2];?>
                         </span>
                         <i class="fas fa-angle-down pull-right"></i>
@@ -86,8 +91,6 @@
                                             </div>
                                             <div class="modal-body">
                                                 <div class="col-xs-4 no-padding" id="profile-image">
-                                                    <?php global $wpdb;?>
-                                                    <?php $user = $wpdb->get_row('SELECT * FROM users WHERE id = "'.$userDataArray[0].'"');?>
                                                     <?php if($user->picture_url):?>
                                                         <img src="<?php echo home_url($user->picture_url);?>" id="profile-image-img"/>
                                                     <?php else:?>
@@ -101,11 +104,15 @@
                                                         <label for="profile-image-input">Seleccione una imagen para subir</label>
                                                         <small class="col-xs-12 no-padding"><span class="asterisk">*</span><i> Sólo se permiten formatos .jpg, .jpeg y .png</i></small>
                                                         <input type="file" class="pull-left" id="profile-image-input" name="profile-image-input" accept=".jpg, .jpeg, .png" value="Buscar imagen">
-                                                        <button class="col-xs-4 btn btn-success ld-ext-right hovering submit">
-                                                            Aceptar
-                                                            <span class="ld ld-ring ld-spin"></span>
-                                                        </button>
-                                                        <small class="col-xs-8 no-padding status"></small>
+                                                        <div class="col-xs-12 no-padding action-buttons">
+                                                            <button class="col-xs-4 btn btn-success ld-ext-right hovering submit">
+                                                                Aceptar
+                                                                <span class="ld ld-ring ld-spin"></span>
+                                                            </button>
+                                                            <a href="" class="col-xs-4 close-link"><small>Cerrar ventana</small></a>
+                                                            <small class="col-xs-12 no-padding status"></small>
+                                                        </div>
+
                                                     </form>
                                                 </div>
                                             </div>
