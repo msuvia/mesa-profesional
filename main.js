@@ -167,8 +167,8 @@ $(document).ready(function(){
                     success: function(data){
                         $('#uploadModal button.submit').removeClass('running');
                         if(data.status=='OK'){
-                            $('#uploadModal').find('status').html('<span>Foto de perfil guardada satisfactoriamente.</span><a href="" class="close-link">Salir</a>');
-                            $('#uploadModal').find('status').addClass('text-success');
+                            $('#uploadModal').find('.status').html('<span>Foto de perfil guardada satisfactoriamente.</span><a href="" class="close-link">Salir</a>');
+                            $('#uploadModal').find('.status').addClass('text-success');
                             $('#uploadModal .close-link').on('click',function(){
                                 $('.modal').removeClass('in').hide();
                                 $('.modal-backdrop').remove();
@@ -177,16 +177,16 @@ $(document).ready(function(){
                         }
                         else{
                             var messageError = (typeof data.message !== typeof undefined) ? data.message : 'Se ha producido un error desconocido, por favor contáctese con nuestros administradores.';
-                            $('#uploadModal').find('status').addClass('text-error');
-                            $('#uploadModal').find('status').html(messageError);
+                            $('#uploadModal').find('.status').addClass('text-error');
+                            $('#uploadModal').find('.status').html(messageError);
                         }
 
                     },
                     error: function(data){
                         var messageError = (typeof data.message !== typeof undefined) ? data.message : 'Se ha producido un error desconocido, por favor contáctese con nuestros administradores.';
                         $('#uploadModal button.submit').removeClass('running');
-                        $('#uploadModal').find('status').addClass('text-error');
-                        $('#uploadModal').find('status').html(messageError);
+                        $('#uploadModal').find('.status').addClass('text-error');
+                        $('#uploadModal').find('.status').html(messageError);
                     }
                 });
             }
