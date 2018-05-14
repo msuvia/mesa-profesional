@@ -187,33 +187,28 @@ get_header();
                                                     <div class="col-xs-12 no-padding rating-content">
                                                         <label class="col-xs-12" for="stars-5">
                                                             <input type="radio" name="answer-rating" value="5" id="stars-5" class="pull-left" checked="checked">
-                                                            <span class="pull-left stars stars-5"></span>
-                                                            <small class="rating-text">5 estrellas</small>
-                                                            <input type="hidden" class="average" value="5"/>
+                                                            <span class="pull-left event_star star_in" data-starnum="5"><i></i></span>
+                                                            <small class="rating-text">Excelente</small>                                                            
                                                         </label>
                                                         <label class="col-xs-12" for="stars-4">
                                                             <input type="radio" name="answer-rating" value="4" id="stars-4" class="pull-left">
-                                                            <span class="pull-left stars stars-4"></span>
-                                                            <small class="rating-text">4 estrellas</small>
-                                                            <input type="hidden" class="average" value="4"/>
+                                                            <span class="pull-left event_star star_in" data-starnum="4"><i></i></span>
+                                                            <small class="rating-text">Muy buena</small>
                                                         </label>
                                                         <label class="col-xs-12" for="stars-3">
                                                             <input type="radio" name="answer-rating" value="3" id="stars-3" class="pull-left">
-                                                            <span class="pull-left stars stars-3"></span>
-                                                            <small class="rating-text">3 estrellas</small>
-                                                            <input type="hidden" class="average" value="3"/>
+                                                            <span class="pull-left event_star star_in" data-starnum="3"><i></i></span>
+                                                            <small class="rating-text">Buena</small>
                                                         </label>
                                                         <label class="col-xs-12" for="stars-2">
                                                             <input type="radio" name="answer-rating" value="2" id="stars-2" class="pull-left">
-                                                            <span class="pull-left stars stars-2"></span>
-                                                            <small class="rating-text">2 estrellas</small>
-                                                            <input type="hidden" class="average" value="2"/>
+                                                            <span class="pull-left event_star star_in" data-starnum="2"><i></i></span>
+                                                            <small class="rating-text">Regular</small>
                                                         </label>
                                                         <label class="col-xs-12" for="stars-1">
                                                             <input type="radio" name="answer-rating" value="1" id="stars-1" class="pull-left">
-                                                            <span class="pull-left stars stars-1"></span>
-                                                            <small class="rating-text">1 estrella</small>
-                                                            <input type="hidden" class="average" value="1"/>
+                                                            <span class="pull-left event_star star_in" data-starnum="1"><i></i></span>
+                                                            <small class="rating-text">Mala</small>
                                                         </label>
                                                     </div>
                                                     <div class="col-xs-12 no-padding answer-comments">
@@ -271,12 +266,10 @@ get_header();
                         <div class="prof-name">
                             <?php echo $professional->first_name.' '.$professional->last_name;?>
                         </div>
-                        <div class="jrating">
-                            <div class="rating">
-                                <span class="pull-left stars"></span>
-                                <small><?php echo $professional->rating;?></small>
-                                <input type="hidden" class="average" value="<?php echo $professional->rating;?>"/>
-                            </div>
+                        <div class="pull-right rating">
+                            <?php $roundedAverage = getRoundedAverage($professional->rating);?>
+                            <small class="pull-left"><?php echo $roundedAverage;?></small>
+                            <span class="pull-left event_star star_in" data-starnum="<?php echo $roundedAverage;?>"><i></i></span>
                         </div>
                     </div>
                 <?php endif;?>

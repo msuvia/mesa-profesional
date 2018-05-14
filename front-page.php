@@ -193,12 +193,10 @@
                             <div class="prof-name">
                                 <?php echo $professional->first_name.' '.$professional->last_name;?>
                             </div>
-                            <div class="jrating">
-                                <div class="rating">
-                                    <span class="pull-left stars"></span>
-                                    <small><?php echo $professional->rating;?></small>
-                                    <input type="hidden" class="average" value="<?php echo $professional->rating;?>"/>
-                                </div>
+                            <div class="pull-right rating">
+                                <?php $roundedAverage = getRoundedAverage($professional->rating);?>
+                                <small class="pull-left"><?php echo $roundedAverage;?></small>
+                                <span class="pull-left event_star star_in" data-starnum="<?php echo $roundedAverage;?>"><i></i></span>
                             </div>
                         </div>
                     <?php endif;?>

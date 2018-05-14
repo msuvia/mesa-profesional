@@ -56,7 +56,7 @@
 
         <div class="col-xs-12 no-padding">
             <div class="col-xs-2 pull-left">
-              <a class="pull-left" href="<?php echo home_url();?>"><img class="mp-logo" src="<?php echo home_url('/wp-content/uploads/2018/03/mp-logo-transparency2.png');?>" title="Mesa Profesional" alt="Mesa Profesional"/></a>
+              <a class="pull-left" href="<?php echo home_url();?>"><img class="mp-logo" src="<?php echo home_url('/wp-content/uploads/2018/03/mp-logo-transparency4.png');?>" title="Mesa Profesional" alt="Mesa Profesional"/></a>
             </div>
 
 

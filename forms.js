@@ -163,7 +163,7 @@ $(document).ready(function(){
                 },"json");
             }
             // upload profile form into modal ?
-            else if(form.parents('.modal#uploadModal')){
+            else if(form.parents('.modal#uploadModal').length > 0){
                 // actions in main.js -> checkModal function...
                 return true;
             }

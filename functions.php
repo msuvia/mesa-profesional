@@ -30,10 +30,12 @@ add_action('wp_enqueue_scripts', 'theme_styles');
 
 
 function theme_scripts(){
-    wp_enqueue_script('script',             get_template_directory_uri() . '/jquery-1.8.3.min.js');
+    //wp_enqueue_script('script',             get_template_directory_uri() . '/jquery-1.8.3.min.js');
+    wp_enqueue_script('script',             get_template_directory_uri() . '/jquery-1.11.3.min.js');
     wp_enqueue_script('bootstrap',          get_template_directory_uri() . '/bootstrap.min.js');
     wp_enqueue_script('fontawesome',        get_template_directory_uri() . '/fontawesome-all.js');
-    wp_enqueue_script('bootstrap-toggle', '/wp-includes/js/bootstrap/bootstrap-toggle.min.js');
+    wp_enqueue_script('bootstrap-toggle',   '/wp-includes/js/bootstrap/bootstrap-toggle.min.js');
+    wp_enqueue_script('voteStar',           '/wp-includes/js/jquery/jquery.voteStar.js');
 
 
     /*wp_localize_script( 'jquery', 'my_ajax_vars', array(
@@ -688,6 +690,27 @@ function buildPreferenceData($data){
 
 
 
+function getRoundedAverage($average){
+    //d($average);
+    $allowedValues = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
+    $min = 10;
+    $index = -1;
+    $average = floatval($average);
+    //d($average);
+
+    foreach ($allowedValues as $key => $value) {
+        $tmp = abs($average - $value);
+        if($tmp < $min){
+            $min = $tmp;
+            $index = $key;
+        }
+    }
+
+    return $allowedValues[$index];
+}
+
+
+
 function sendClientFacebookRegisterEmail($data) {
     $link       = home_url('/');
     $subject    = '¡Gracias por registrarse a Mesa Profesional!';
@@ -803,6 +826,7 @@ function sendClientConsultationEmail($data){
 
     return wp_mail($data['to'], $subject, $body);
 }
+
 
 
 
