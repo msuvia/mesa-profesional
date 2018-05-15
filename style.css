@@ -308,6 +308,10 @@ footer .container .signature{
     color: #FFF;
 }
 
+.site-header .user-data #user-data-menu img{
+    width: 25px;
+}
+
 .site-header .user-data .dropdown{
     cursor: pointer;
 }
@@ -327,7 +331,7 @@ footer .container .signature{
 }
 
 .site-header .user-data .dropdown .user-name{
-    margin: 0 10px;
+    margin: 0 10px 0 5px;
 }
 
 .site-header .user-data .dropdown svg.fa-angle-down{
@@ -1208,6 +1212,7 @@ article.professionals-sign .form-wrap h5{
 
 .dashboard .sidebar ul li a.question .status-detail{
     font-size: 10px;
+    margin-top: 5px;
 }
 
 .dashboard .sidebar ul li a.question .status-detail.answered-by{
@@ -1220,7 +1225,6 @@ article.professionals-sign .form-wrap h5{
 
 .dashboard .sidebar ul li a.question .status-detail span{
     color: #999;
-    float: left;
 }
 
 .dashboard .sidebar ul li a.question .status-detail span{
