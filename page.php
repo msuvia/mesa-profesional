@@ -1,34 +1,28 @@
 <?php
 
-
-    if(!empty($_GET) && $_GET['p']==='p1'){
-        $userPassDecoded = [
-            '1' => 'mesa02',
-            '2' => 'MESA03',
-            '4' => 'asd',
-            '5' => 'asd',
-            '6' => 'asd'
-        ];
+    $json = '{"1":"mesa02","2":"MESA03","3":"mesa02","37":"Loren01","4":"asd","5":"asd","6":"asd","36":"asd"}';
 
 
+    if(!empty($json)){
+        $userPassDecoded = json_decode($json,true);
+        global $wpdb;
+        foreach($userPassDecoded as $userId => $userPass){
+            $wpdb->update('users',['password'=>encryptIt($userPass)],['id'=>$userId]);
+            d('Updated user id: '.$userId);
+        }
+    } else {
         global $wpdb;
         $users = $wpdb->get_results('SELECT * FROM users');
 
-
-        if(empty($userPassDecoded)){
-            foreach($users as $user){
-                if($user->password){
-                    $pass = decryptIt($user->password);
-                    d('User: '.$user->first_name.' '.$user->last_name. ', id: '.$user->id.', pass: ' . $pass);
-                    $userPassDecoded[$user->id] = $pass;
-                }
-            }
-        } else {
-            foreach($userPassDecoded as $userId => $userPass){
-                $wpdb->update('users',['password'=>encryptIt($userPass)],['id'=>$userId]);
-                d('Updated user id: '.$userId);
+        foreach($users as $user){
+            if($user->password){
+                $pass = decryptIt($user->password);
+                d('User: '.$user->first_name.' '.$user->last_name. ', id: '.$user->id.', pass: ' . $pass);
+                $userPassDecoded[$user->id] = $pass;
             }
         }
+
+        d(json_encode($userPassDecoded));
     }
 
 

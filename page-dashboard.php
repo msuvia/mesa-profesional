@@ -23,8 +23,10 @@
                 $success = $wpdb->update('answers', ['text'=>$answer,'timestamp'=>date('Y-m-d H:i:s')], ['id'=>$question->answer_id]);
                 if($success){
                     if(isset($_POST['sendEmail']) && 'true'==$_POST['sendEmail'] && !$question->sended_email){
-                        sendAnswerEmail($question);
-                        $wpdb->update('answers', ['sended_email'=>1], ['id'=>$question->answer_id]);
+                        $sendedEmail = sendAnswerEmail($question);
+                        if($sendedEmail){
+                            $wpdb->update('answers', ['sended_email'=>1], ['id'=>$question->answer_id]);
+                        }
                     }
                     echo json_encode(['status'=>'OK']);die;
                 }
@@ -44,8 +46,10 @@
                     $success = $wpdb->update('questions', ['answer_id'=>$wpdb->insert_id], ['token'=>$token]);
                     if($success){
                         if(isset($_POST['sendEmail']) && 'true'==$_POST['sendEmail'] && !$question->sended_email){
-                            sendAnswerEmail($question);
-                            $wpdb->update('answers', ['sended_email'=>1], ['id'=>$answerId]);
+                            $sendedEmail = sendAnswerEmail($question);
+                            if($sendedEmail){
+                                $wpdb->update('answers', ['sended_email'=>1], ['id'=>$answerId]);
+                            }
                         }
                         echo json_encode(['status'=>'OK']);die;
                     }

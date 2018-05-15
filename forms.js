@@ -145,8 +145,8 @@ $(document).ready(function(){
             if(scrollElement != '') $('html, body').animate({ scrollTop: (scrollElement.offset().top - 70) }, 500);
         }
         else{
-            // dropdown ?
-            if(form.parent().parent().hasClass('dropdown-content')){
+            // dropdown or modal login?
+            if(form.parents('.dropdown-content').length > 0 || form.parents('.login-modal').length > 0){
                 form.find('button.submit').addClass('running');
                 $.post('/login',{email: email.val(), password: password.val(), from:"js"}, function(data){
                     form.find('.alert-warning').remove();

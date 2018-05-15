@@ -222,7 +222,8 @@ function encryptIt($q) {
     //$cryptKey   = 'qJB0rGtIn5UB1xG03efyCp';
     //$cryptKey   = 'qJB0rGtIn5UB1xG';
     //$cryptKey   = 'nDk6dSh3vcX8';
-    $cryptKey   = '97438027782374892';
+    //$cryptKey   = '97438027782374892';
+    $cryptKey   = '97438027';
     $qEncoded   = base64_encode( mcrypt_encrypt( MCRYPT_RIJNDAEL_256, md5( $cryptKey ), $q, MCRYPT_MODE_CBC, md5( md5( $cryptKey ) ) ) );
     return( $qEncoded );
 }
@@ -232,10 +233,11 @@ function encryptIt($q) {
  * Decrypt a string
  */
 function decryptIt($q) {
-    //$cryptKey     = 'qJB0rGtIn5UB1xG03efyCp';
+    //$cryptKey   = 'qJB0rGtIn5UB1xG03efyCp';
     //$cryptKey   = 'qJB0rGtIn5UB1xG';
     //$cryptKey   = 'nDk6dSh3vcX8';
-    $cryptKey       = '97438027782374892';
+    //$cryptKey   = '97438027782374892';
+    $cryptKey   = '97438027';
     $qDecoded   = rtrim( mcrypt_decrypt( MCRYPT_RIJNDAEL_256, md5( $cryptKey ), base64_decode( $q ), MCRYPT_MODE_CBC, md5( md5( $cryptKey ) ) ), "\0");
     return( $qDecoded );
 }
@@ -553,35 +555,6 @@ function checkRules(){
 }
 
 
-/*
- * Send answer confirmation email
- */
-function sendAnswerEmail($question){
-    $emailTo = $question->email;
-    if (!isset($emailTo) || ($emailTo == '') ){
-        $emailTo = get_option('admin_email');
-    }
-
-    $key = encryptIt('token-'.$question->token);
-    $questionUrl = home_url('/questions?key='.$key);
-
-    $subject = '¡Su pregunta ha sido respondida en Mesa Profesional!';
-    
-    $body  = 'Hola '.$question->first_name.' '.$question->last_name. '!<br><br>';
-    $body .= 'Hemos detectado que uno de nuestros profesionales ha respondido su pregunta.<br><br>';
-    $body .= 'Puede ver y calificar la respuesta haciendo click <a href="'.$questionUrl.'">aquí</a>.<br><br>';
-    $body .= 'Si el link no funciona, copie este código en la barra del navegador:<br>';
-    $body .= $questionUrl.'<br><br>';
-    $body .= 'Recuerde que puede calificar la respuesta de nuestro profesional para que, de esta manera, podamos brindarle la mejor información.<br><br>';
-    $body .= 'Lo saluda atentamente<br>';
-    $body .= 'El equipo de <a href="'.home_url('/').'">Mesa Profesional</a>.<br><br>';
-    $body = htmlspecialchars_decode($body);
-
-    wp_mail($emailTo, $subject, $body, $headers);
-    $success = true;
-
-}
-
 
 /*function breadcrumb() {
     if (!is_home()) {
@@ -825,6 +798,32 @@ function sendClientConsultationEmail($data){
     $body = htmlspecialchars_decode($body);
 
     return wp_mail($data['to'], $subject, $body);
+}
+
+
+/*
+ * Send answer confirmation email
+ */
+function sendAnswerEmail($question){
+    $emailTo = $question->email;
+
+    $key = encryptIt('token-'.$question->token);
+    $questionUrl = home_url('/questions?key='.$key);
+
+    $subject = '¡Su pregunta ha sido respondida en Mesa Profesional!';
+
+    $body  = 'Hola '.$question->first_name.' '.$question->last_name. '!<br><br>';
+    $body .= 'Hemos detectado que uno de nuestros profesionales ha respondido su pregunta.<br><br>';
+    $body .= 'Puede ver y calificar la respuesta haciendo click <a href="'.$questionUrl.'">aquí</a>.<br><br>';
+    $body .= 'Si el link no funciona, copie este código en la barra del navegador:<br>';
+    $body .= $questionUrl.'<br><br>';
+    $body .= 'Recuerde que puede calificar la respuesta de nuestro profesional para que, de esta manera, podamos brindarle la mejor información.<br><br>';
+    $body .= 'Lo saluda atentamente<br>';
+    $body .= 'El equipo de <a href="'.home_url('/').'">Mesa Profesional</a>.<br><br>';
+    $body = htmlspecialchars_decode($body);
+
+    return wp_mail($emailTo, $subject, $body);
+
 }
 
 
