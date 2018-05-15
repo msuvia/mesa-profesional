@@ -53,12 +53,35 @@ $(document).ready(function(){
 
     // ********** modals ********** //
     if($('.modal').length > 0){
-        if($('#packsModal').length > 0 || $('#loginModal').length > 0){
+
+        // login modal
+        if( $('.modal#loginModal').length > 0){
             // automatic show
             $('button#modal').trigger('click');
         }
 
-        if($('#uploadModal').length > 0){
+
+        // packs modal
+        if($('.modal#packsModal').length > 0){
+            // first time
+            if($('.modal#packsModal').find('.mercado-pago-result').length == 0){
+                $('button#modal').trigger('click');
+            } else {
+                if($('.modal#packsModal').find('.mercado-pago-result').val() == 'approved'){
+                    // approved payments
+                    setTimeout(function() {
+                        checkActionModal();
+                    }, 3000);
+                } else {
+                    // not approved payments, show modal
+                    $('button#modal').trigger('click');
+                    return true;
+                }
+            }
+        }
+
+
+        if($('.modal#uploadModal').length > 0){
             // add events
             $("#profile-image-input").change(function() {
                 $(this).siblings('error').empty();
@@ -95,7 +118,7 @@ $(document).ready(function(){
 
             $('#uploadModal .close-link').on('click',function(ev){
                 ev.preventDefault();ev.stopPropagation();
-                checkModal(ev);
+                checkCloseModal(ev);
             })
         }
 
@@ -103,53 +126,34 @@ $(document).ready(function(){
         // **** all modals - begin
         $('.modal .close').on('click',function(ev){
             ev.preventDefault();ev.stopPropagation();
-            checkModal(ev);
+            checkCloseModal(ev);
         });
 
         $('.modal .btn-success').on('click',function(ev){
             ev.preventDefault();ev.stopPropagation();
-            checkModal(ev);
+            checkActionModal(ev);
         });
-
-        if($('.modal').find('.loading').length > 0){
-            var timer = setTimeout(function() {
-                checkModal();
-            }, 3000);    
-        }
         // **** all modals - end
 
-        function checkModal(ev){
 
+        function checkActionModal(ev)
+        {
             // login modal
-            if($('.modal').find('.login-modal').length > 0){
-                $('.modal').removeClass('in').hide();
+            if($('.modal#loginModal').length > 0){
+                // action into forms.js
+                return true;
+            }
+            
+            // pack modal
+            if($('.modal#packsModal').length > 0){
+                // approved payment
+                $('.modal#packsModal').removeClass('in').hide();
                 $('.modal-backdrop').remove();
                 $('body').removeClass('modal-open');
-                window.location.href='https://mesaprofesional.com';
+                $('.alert-payment-approved').show();
+                return true;
             }
-
-
-            // packs modal
-            if($('.modal').find('.packs-modal').length > 0){
-                $('.modal').removeClass('in').hide();
-                $('.modal-backdrop').remove();
-                $('body').removeClass('modal-open');
-
-                // check MP
-                if($('.modal').find('.mercado-pago-result').length > 0){
-                    if($('.modal').find('.mercado-pago-result').val() == 'approved'){
-                        $('.alert-payment-approved').show();
-                        return true;
-                    } else {
-                        window.location.href='https://mesaprofesional.com';
-                    }
-                }
-                else {
-                    window.location.href='https://mesaprofesional.com';
-                }
-            }
-
-
+            
 
             // upload profile image modal
             if($('.modal').find('.upload-modal').length > 0){
@@ -201,6 +205,48 @@ $(document).ready(function(){
                     $('.modal-backdrop').remove();
                     $('body').removeClass('modal-open');
                 }
+            }
+        }
+
+
+        function checkCloseModal()
+        {
+            // close login modal
+            if($('#loginModal').length > 0){
+                $('.modal').removeClass('in').hide();
+                $('.modal-backdrop').remove();
+                $('body').removeClass('modal-open');
+                window.location.href='https://mesaprofesional.com';
+                return true;
+            }
+
+            // close packs modal
+            if($('.modal#packsModal').length > 0){
+                $('.modal#packsModal').removeClass('in').hide();
+                $('.modal-backdrop').remove();
+                $('body').removeClass('modal-open');
+                window.location.href='https://mesaprofesional.com';
+                return true;
+                
+
+                /*if($('.modal#packsModal').find('.mercado-pago-result').val() != 'approved'){
+                    window.location.href='https://mesaprofesional.com';
+                    return true;
+                }
+                
+                
+                // check MP
+                if($('.modal').find('.mercado-pago-result').length > 0){
+                    if($('.modal').find('.mercado-pago-result').val() == 'approved'){
+                        $('.alert-payment-approved').show();
+                        return true;
+                    } else {
+                        window.location.href='https://mesaprofesional.com';
+                    }
+                }
+                else {
+                    window.location.href='https://mesaprofesional.com';
+                }*/
             }
         }
     }

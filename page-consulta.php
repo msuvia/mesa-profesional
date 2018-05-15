@@ -277,7 +277,7 @@ if(have_posts()):
                 <!-- Button trigger modal -->
                 <button class="btn btn-primary btn-lg hidden" id="modal" data-toggle="modal" data-target="#packsModal"></button>
                 <!-- Modal -->
-                <div class="modal fade" id="packsModal" tabindex="-1" role="dialog" aria-labelledby="payQuestionsModalLabel" aria-hidden="true">
+                <div class="modal fade" id="packsModal" tabindex="-1" role="dialog" aria-labelledby="packsModalLabel" aria-hidden="true">
                     <div class="vertical-alignment-helper">
                         <div class="modal-dialog vertical-align-center packs-modal">
                             <div class="modal-content <?php echo (!empty($_SESSION['paymentStatus']) && $_SESSION['paymentStatus'] == 'approved') ? 'ld-over running' : '';?>">
