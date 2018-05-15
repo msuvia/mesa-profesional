@@ -17,7 +17,6 @@
         foreach($users as $user){
             if($user->password){
                 $pass = decryptIt($user->password);
-                d('User: '.$user->first_name.' '.$user->last_name. ', id: '.$user->id.', pass: ' . $pass);
                 $userPassDecoded[$user->id] = $pass;
             }
         }

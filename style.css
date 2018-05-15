@@ -383,7 +383,7 @@ footer .container .signature{
 }
 
 .site-header .site-nav-wrap nav ul li a:before {
-    left: 0;
+    left: -1px;
     bottom: 0;
     width: 100%;
     height: 4px;
@@ -935,7 +935,7 @@ article.posts .questions .question .question-inner .user-image{
 }
 
 article.posts .questions .question .question-inner .user-image img{
-    width: 20px;
+    width: 25px;
     margin-top: 10px;
 }
 
@@ -998,7 +998,7 @@ article.posts .questions .question .answer-inner .user-image{
 }
 
 article.posts .questions .question .answer-inner .user-image img{
-    width: 20px;
+    width: 25px;
     margin: 5px 0 0 10px;
 }
 
@@ -1350,7 +1350,7 @@ span.stars span {
 }
 
 .professionals-box .professional-info img{
-    width: 15px;
+    width: 25px;
     vertical-align: middle;
     display: table-cell;
     padding: 6px 0;
@@ -1369,7 +1369,7 @@ span.stars span {
 }
 
 .professionals-box .professional-info .rating{
-    line-height: 27px;
+    line-height: 37px;
 }
 
 .professionals-box .professional-info .rating small{
@@ -1377,7 +1377,7 @@ span.stars span {
 }
 
 .professionals-box .professional-info .rating span{
-    margin: 3px 0 0 3px;
+    margin: 8px 0 8px 3px;
 }
 
 .professionals-box .professional-info .jrating .rating small{
