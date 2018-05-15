@@ -122,9 +122,9 @@ add_filter('excerpt_length', 'custom_excerpt_length');
 function learningWordPress_setup(){
 	// Navigation Menus
 	register_nav_menus([
-	    'primary'   => __('Primary Menu'),
-        'admin'     => __('Admin Menu')
-	    //'footer'    => __('Footer Menu')
+        'admin'         => __('Admin Menu'),
+	    'professional'  => __('Professional Menu'),
+        'primary'       => __('Primary Menu')
 	]);
 
 	/* Add feature image support */

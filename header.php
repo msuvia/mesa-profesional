@@ -123,11 +123,16 @@
                         <?php endif;?>
                     </div>
                     <div class="dropdown-content" aria-labelledby="user-data-menu">
-                        <?php $key = encryptIt('userid-'.$userDataArray[0]);?>
-                        <?php if(isRol('professional',$userData)):?>
-                        <a class="col-xs-12 dropdown-item dropdown-picture-item">Subir una foto de perfil</a>
+                        <?php if(isRol('user',$userData)):?>
+                            <?php $key = encryptIt('userid-'.$userDataArray[0]);?>
+                            <a class="col-xs-12 dropdown-item" href="<?php echo home_url('/questions?key='.$key);?>">Mis consultas</a>
+                        <?php else:?>
+                            <?php if(isRol('professional',$userData)):?>
+                                <a class="col-xs-12 dropdown-item dropdown-picture-item">Subir una foto de perfil</a>
+                                <?php $key = encryptIt('profid-'.$userDataArray[0]);?>
+                                <a class="col-xs-12 dropdown-item" href="<?php echo home_url('/questions?key='.$key);?>">Mis respuestas</a>
+                            <?php endif;?>
                         <?php endif;?>
-                        <a class="col-xs-12 dropdown-item" href="<?php echo home_url('/questions?key='.$key);?>">Mis consultas</a>
                         <a class="col-xs-12 dropdown-item" href="<?php echo home_url('/logout');?>">Cerrar sesión</a>
                     </div>
                 </div>
@@ -156,9 +161,13 @@
                     <span>Mesa Profesional</span>
                 </div>
                 <?php if($userData && isRol('admin',$userData)):?>
-                  <?php wp_nav_menu(['theme_location' => 'admin']);?>
+                    <?php wp_nav_menu(['theme_location' => 'admin']);?>
                 <?php else:?>
-                  <?php wp_nav_menu(['theme_location' => 'primary']);?>
+                    <?php if($userData && isRol('professional',$userData)):?>
+                        <?php wp_nav_menu(['theme_location' => 'professional']);?>
+                    <?php else:?>
+                        <?php wp_nav_menu(['theme_location' => 'primary']);?>
+                    <?php endif;?>
                 <?php endif;?>
             </nav>
         </div>
