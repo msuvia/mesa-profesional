@@ -53,7 +53,7 @@ $(document).ready(function(){
 
     // ********** modals ********** //
     if($('.modal').length > 0){
-        if($('#payQuestionsModal').length > 0 || $('#loginModal').length > 0){
+        if($('#packsModal').length > 0 || $('#loginModal').length > 0){
             // automatic show
             $('button#modal').trigger('click');
         }
