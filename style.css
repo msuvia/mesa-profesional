@@ -1604,4 +1604,10 @@ span.stars span {
 .star_small[data-starnum="5"] i { width: 70px }
 
 
+@media (max-width: 991px){
+    .right-col{
+        padding: 0;
+        margin: 20px 0 0 0;
+    }
+}
 

@@ -317,7 +317,6 @@ if(have_posts()):
                                                     </div>
                                                     <div class="col-xs-3 no-padding">
                                                         <?php
-                                                            $aliasForPayment = ($userDataArray[3] == 'mail@test.com') ? 'test_user_63938795@testuser.com' : $userDataArray[3];
                                                             $preference_data = buildPreferenceData([
                                                                 'itemId'            => $pack->id,
                                                                 'itemTitle'         => $pack->title,
@@ -326,7 +325,7 @@ if(have_posts()):
                                                                 'itemPrice'         => $pack->price,
                                                                 'payerFirstName'    => $userDataArray[1],
                                                                 'payerLastName'     => $userDataArray[2],
-                                                                'payerEmail'        => $aliasForPayment,
+                                                                'payerEmail'        => 'test_user_63938795@testuser.com',    // $userDataArray[3]
                                                                 'urlSuccess'        => home_url('/mercadopago/callback'),
                                                                 'urlPending'        => home_url('/'),
                                                                 'urlFailure'        => home_url('/mercadopago/callback'),

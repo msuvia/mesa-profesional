@@ -72,8 +72,6 @@ if(!empty($_POST)){
                     $mp = inicializeMercadoPago();
                     $subscription = $wpdb->get_row('SELECT * FROM products WHERE type = "subscription"');
 
-                    $aliasForPayment = ($user->email == 'marcelo.suvia@gmail.com')  ? 'test_user_25772596@testuser.com' : $user->email;
-
                     $preference_data = buildPreferenceData([
                         'itemId'            => $subscription->id,
                         'itemTitle'         => $subscription->title,
@@ -82,7 +80,7 @@ if(!empty($_POST)){
                         'itemPrice'         => $subscription->price,
                         'payerFirstName'    => $user->first_name,
                         'payerLastName'     => $user->last_name,
-                        'payerEmail'        => $aliasForPayment,
+                        'payerEmail'        => 'test_user_25772596@testuser.com',    // $user->email
                         'urlSuccess'        => home_url('/mercadopago/callback'),
                         'urlPending'        => home_url('/mercadopago/callback'),
                         'urlFailure'        => home_url('/mercadopago/callback'),

@@ -50,7 +50,7 @@
 
 
         <div class="col-xs-12 no-padding">
-            <div class="col-xs-9 no-padding left-col">
+            <div class="col-md-9 col-xs-12 no-padding left-col">
 
                 <div class="col-xs-12 no-padding box">
                     <div class="card col-xs-8 col-xs-offset-2">
@@ -173,7 +173,7 @@
                 </div>                
             </div>
 
-            <div class="col-xs-3 no-padding-right right-col">
+            <div class="col-md-3 col-xs-12 no-padding-right right-col">
                 <div class="professionals-box col-xs-12 box">
                     <h5>Ranking de profesionales</h5>
                     <!--<?php dynamic_sidebar('sidebar1');?>-->
