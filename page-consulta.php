@@ -246,20 +246,15 @@ if(have_posts()):
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
                             </div>
                             <div class="modal-body">
-                                <div class="col-xs-12 no-padding">
-                                    <div class="col-xs-7 mp-login-form no-padding">
+                                <div class="col-xs-12 no-padding form-wrap">
+                                    <div class="col-xs-6 mp-login-form no-padding">
                                         <?php get_template_part('login-form');?>
                                     </div>
-                                    <div class="col-xs-5">
-                                        <div id="fb-root"></div>
-                                        <script>(function(d, s, id) {
-                                          var js, fjs = d.getElementsByTagName(s)[0];
-                                          if (d.getElementById(id)) return;
-                                          js = d.createElement(s); js.id = id;
-                                          js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.12&appId=1641925725889638&autoLogAppEvents=1';
-                                          fjs.parentNode.insertBefore(js, fjs);
-                                        }(document, 'script', 'facebook-jssdk'));</script>
-                                        <div class="fb-login-button" data-width="280" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
+                                    <div class="col-xs-6">
+                                        <button type="button" id="fb-login-btn">
+                                            <i class="fab fa-facebook pull-left"></i>
+                                            <span class="pull-left">Iniciar sesión con Facebook</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>

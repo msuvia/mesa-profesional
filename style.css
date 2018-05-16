@@ -724,6 +724,10 @@ form .char-count{
     font-size: 12px;
 }
 
+.modal-dialog .modal-content .modal-body #fb-login-btn{
+    margin: 42px 0 0 30px;
+}
+
 
 /* Modal Dialog Packs */
 .modal-dialog.packs-modal .modal-content h3{
