@@ -83,6 +83,14 @@ header::before{
     height: 45px;
 }
 
+.desktop{
+    display: block!important;
+}
+
+.mobile{
+    display: none!important;
+}
+
 a.professional-name.text-success{
     font-size: 10px;
     font-style: italic;
@@ -873,10 +881,20 @@ form .char-count{
     filter: alpha(opacity=10); /* For IE8 and earlier */
 }
 
+.modal-dialog.upload-modal #profile-image{
+    height: 150px;
+    display: flex;
+}
+
+.modal-dialog.upload-modal #profile-image img{
+    width: 50px;
+    margin: auto;
+}
+
 .modal-dialog.upload-modal #profile-image .ld-spin{
     position: absolute;
-    top: 40%;
-    left: 47%;
+    top: 46%;
+    left: 46%;
 }
 
 .modal-dialog.upload-modal small{
@@ -997,7 +1015,7 @@ article.posts .questions .question .answer-inner{
 
 article.posts .questions .question .answer-inner .fa-level-up-alt{
     transform: rotate(90deg);
-    color: #999;
+    color: #999999;
     margin-top: -2px;
 }
 
@@ -1007,14 +1025,14 @@ article.posts .questions .question .answer-inner .user-image{
 
 article.posts .questions .question .answer-inner .user-image img{
     width: 25px;
-    margin: 5px 0 0 10px;
+    margin: 0 0 0 10px;
 }
 
 article.posts .questions .question .answer-inner .user-image svg{
     position: absolute;
-    top: -2px;
+    top: -7px;
     right: -13px;
-    color: #FFF;
+    color: #FFFFFF;
 }
 
 article.posts .questions .question .answer-inner .answer-content{
@@ -1028,7 +1046,7 @@ article.posts .questions .question .answer-inner .answer-content .answer-text{
 article.posts .questions .question .answer-inner .answer-content .answer-user-name{
     font-size: 10px;
     color: #999;
-    margin: 7px 0 0;
+    margin: 3px 0 0 0;
 }
 
 article.posts .questions .question .answer-rating{
@@ -1341,8 +1359,10 @@ span.stars span {
     background-position: 0 0;
 }
 
-.professionals-box{
-    min-height: 700px;
+.professionals-box .scroller{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 60px;
 }
 
 .professionals-box h5{
@@ -1605,9 +1625,25 @@ span.stars span {
 
 
 @media (max-width: 991px){
+    .desktop{
+        display: none!important;
+    }
+
+    .mobile{
+        display: block!important;
+    }
+
     .right-col{
         padding: 0;
         margin: 20px 0 0 0;
+    }
+
+    .navbar-toggle{
+        background-color: #666666;
+    }
+
+    .navbar-toggle .icon-bar{
+        background-color: #FFFFFF;
     }
 }
 

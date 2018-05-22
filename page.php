@@ -28,7 +28,7 @@
 
             d(json_encode($userPassDecoded));
         }
-
+        
     }
 
 ?>

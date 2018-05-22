@@ -13,10 +13,15 @@
             </div>
             <?php endif;?>
 
-            <?php if(is_active_sidebar('footer2')):?>
-            <div class="col-xs-3 footer-widget-area">
-                <?php dynamic_sidebar('footer2');?>
-            </div>
+            <?php $userData = isLoggedIn();?>
+            <?php $showClientSidebar = ($userData && (isRol('admin',$userData) || isRol('professional',$userData))) ? false : true;?>
+
+            <?php if($showClientSidebar):?>
+                <?php if(is_active_sidebar('footer2')):?>
+                <div class="col-xs-3 footer-widget-area">
+                    <?php dynamic_sidebar('footer2');?>
+                </div>
+                <?php endif;?>
             <?php endif;?>
 
             <?php if(is_active_sidebar('footer3')):?>

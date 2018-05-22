@@ -146,7 +146,7 @@
                                                     </div>
                                                     <div class="col-xs-11 answer-content">
                                                         <div class="col-xs-12 no-padding answer-text">
-                                                            <?php echo (strlen($answer->text) <= $limitStr) ? str_replace("\n","<br>",$answer->text) : substr(str_replace("\n","<br>",$answer->text),0,$limitStr).'...';?>
+                                                            <?php echo (strlen($answer->text) <= $limitStr) ? str_replace("\n","<br>",trim($answer->text)) : substr(str_replace("\n","<br>",trim($answer->text)),0,$limitStr).'...';?>
                                                         </div>
                                                         <div class="col-xs-12 no-padding answer-user-name">
                                                             <?php $key = encryptIt('profid-'.$answer->user_id);?>
@@ -175,33 +175,34 @@
 
             <div class="col-md-3 col-xs-12 no-padding-right right-col">
                 <div class="professionals-box col-xs-12 box">
-                    <h5>Ranking de profesionales</h5>
-                    <!--<?php dynamic_sidebar('sidebar1');?>-->
-                    <?php 
-                        global $wpdb;
-                        $professionals = $wpdb->get_results('SELECT avg(rating) as rating, u.first_name, u.last_name, u.picture_url FROM answers a LEFT JOIN users u ON a.user_id = u.id WHERE rol IN (1,2) group by email');
-                    ?>
+                    <div class="col-xs-12 no-padding scroller">
+                        <h5>Ranking de profesionales</h5>
+                        <!--<?php dynamic_sidebar('sidebar1');?>-->
+                        <?php 
+                            global $wpdb;
+                            $professionals = $wpdb->get_results('SELECT avg(rating) as rating, u.first_name, u.last_name, u.picture_url FROM answers a LEFT JOIN users u ON a.user_id = u.id WHERE rol IN (1,2) group by email');
+                        ?>
 
-                    <?php foreach($professionals as $professional):?>
-                    <?php if(!is_null($professional->rating)):?>
-                        <div class="col-xs-12 no-padding professional-info">
-                            <?php if($professional->picture_url):?>
-                                <img class="pull-left" src="<?php echo home_url($professional->picture_url);?>" width="20"/>
-                            <?php else:?>
-                                <img class="pull-left" src="https://mesaprofesional.com/wp-content/uploads/2018/03/perfil-150x150.jpeg"/>
-                            <?php endif;?>
-                            <div class="prof-name">
-                                <?php echo $professional->first_name.' '.$professional->last_name;?>
+                        <?php foreach($professionals as $professional):?>
+                        <?php if(!is_null($professional->rating)):?>
+                            <div class="col-xs-12 no-padding professional-info">
+                                <?php if($professional->picture_url):?>
+                                    <img class="pull-left" src="<?php echo home_url($professional->picture_url);?>" width="20"/>
+                                <?php else:?>
+                                    <img class="pull-left" src="https://mesaprofesional.com/wp-content/uploads/2018/03/perfil-150x150.jpeg"/>
+                                <?php endif;?>
+                                <div class="prof-name">
+                                    <?php echo $professional->first_name.' '.$professional->last_name;?>
+                                </div>
+                                <div class="pull-right rating">
+                                    <?php $roundedAverage = getRoundedAverage($professional->rating);?>
+                                    <small class="pull-left"><?php echo $roundedAverage;?></small>
+                                    <span class="pull-left event_star star_in" data-starnum="<?php echo $roundedAverage;?>"><i></i></span>
+                                </div>
                             </div>
-                            <div class="pull-right rating">
-                                <?php $roundedAverage = getRoundedAverage($professional->rating);?>
-                                <small class="pull-left"><?php echo $roundedAverage;?></small>
-                                <span class="pull-left event_star star_in" data-starnum="<?php echo $roundedAverage;?>"><i></i></span>
-                            </div>
-                        </div>
-                    <?php endif;?>
-                    <?php endforeach;?>
-                    
+                        <?php endif;?>
+                        <?php endforeach;?>
+                    </div>
                 </div>
             </div>
         </div>

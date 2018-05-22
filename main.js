@@ -212,8 +212,8 @@ $(document).ready(function(){
         function checkCloseModal()
         {
             // close login modal
-            if($('#loginModal').length > 0){
-                $('.modal').removeClass('in').hide();
+            if($('.modal#loginModal').length > 0){
+                $('.modal#loginModal').removeClass('in').hide();
                 $('.modal-backdrop').remove();
                 $('body').removeClass('modal-open');
                 window.location.href='https://mesaprofesional.com';
@@ -248,6 +248,13 @@ $(document).ready(function(){
                     window.location.href='https://mesaprofesional.com';
                 }*/
             }
+
+            if($('.modal#uploadModal').length > 0){
+                $('.modal#uploadModal').removeClass('in').hide();
+                $('.modal-backdrop').remove();
+                $('body').removeClass('modal-open');
+            }
+
         }
     }
     
